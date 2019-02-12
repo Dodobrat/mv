@@ -1,0 +1,145 @@
+@import "~bootstrap/scss/bootstrap.scss";
+@import "variables";
+
+//-------------------------------------------
+//          GENERALS
+//-------------------------------------------
+
+body{
+  background-color: $light;
+}
+
+
+//-------------------------------------------
+//          NAVBAR
+//-------------------------------------------
+
+.navigation {
+  background: $light-grey;
+
+  .navbar-brand {
+
+  }
+
+  .navbar-toggler {
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    .hamburger{
+      padding: 5px;
+      .line{
+        width: 25px;
+        height: 2px;
+        background-color: black;
+        display: block;
+        margin: 6px auto;
+        -webkit-transition: all 0.3s ease-in-out;
+        -o-transition: all 0.3s ease-in-out;
+        transition: all 0.3s ease-in-out;
+      }
+      &.is-active .line:nth-child(2) {
+        opacity: 0;
+      }
+      &.is-active .line:nth-child(1) {
+        -webkit-transform: translateY(8px) rotate(45deg);
+        -ms-transform: translateY(8px) rotate(45deg);
+        -o-transform: translateY(8px) rotate(45deg);
+        transform: translateY(8px) rotate(45deg);
+      }
+      &.is-active .line:nth-child(3) {
+        -webkit-transform: translateY(-8px) rotate(-45deg);
+        -ms-transform: translateY(-8px) rotate(-45deg);
+        -o-transform: translateY(-8px) rotate(-45deg);
+        transform: translateY(-8px) rotate(-45deg);
+      }
+    }
+    &:focus{
+      outline: none;
+    }
+  }
+  .navbar-collapse {
+    .navbar-nav {
+      .nav-item {
+        padding: 0 10px;
+        .nav-link {
+          color: #6c757d;
+          text-transform: uppercase;
+          letter-spacing: 2px;
+          &:hover{
+            color: $brand-info;
+          }
+        }
+      }
+    }
+  }
+}
+
+//-------------------------------------------
+//          PORTFOLIO GRID SYSTEM
+//-------------------------------------------
+
+.filter-section{
+  text-align: center;
+  button{
+    padding: 10px 15px;
+    color: $brand-primary;
+  }
+  .active{
+    color: #6c757d;
+  }
+}
+
+
+.portfolio-grid{
+  position: relative;
+  column-gap: 15px;
+  column-count: 5;
+  .portfolio-grid-item{
+    position: relative;
+    overflow: hidden;
+    margin: 5px 0;
+    border: none;
+    border-radius: 0;
+    img{
+      position: relative;
+      border-radius: 0;
+    }
+    .card-overlay-title{
+      transition: 0.2s ease-in-out;
+      opacity: 0;
+      font-weight: 600;
+      font-size: 25px;
+      text-align: center;
+      text-transform: uppercase;
+      position: absolute;
+      margin: 0;
+      padding: 0;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+      .card-overlay-second{
+        font-weight: 100;
+        font-size: 18px;
+      }
+    }
+    .overlay{
+      pointer-events: none;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: rgba(255,255,255,0.5);
+    }
+    &:hover{
+      .card-overlay-title{
+        transition: 0.2s ease-in-out;
+        opacity: 1;
+      }
+    }
+  }
+}
+
+@import "responsive.scss";
