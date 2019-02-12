@@ -9,6 +9,22 @@ global.AOS = require('aos');
 global.Rellax = require('rellax/rellax.js');
 
 // -----------------------------------------
+//             PRELOADER
+// -----------------------------------------
+
+if (document.body.contains(document.getElementById("preloader"))){
+    function preloader(){
+        let preloader = document.getElementById("preloader");
+        window.addEventListener('load', function(){
+            setTimeout(() => {
+                preloader.style.opacity = '0';
+            }, 1);
+        });
+    }
+    preloader();
+}
+
+// -----------------------------------------
 //             INITS
 // -----------------------------------------
 
@@ -16,9 +32,35 @@ AOS.init({
     duration: 400
 });
 
+// -----------------------------------------
+//             DIRECTIONAL HOVER
+// -----------------------------------------
+
 $(function () {
     $('.portfolio-grid > .portfolio-grid-item').hoverdir();
 });
+
+// -----------------------------------------
+//             PARALLAX EFFECT
+// -----------------------------------------
+
+if(document.body.contains(document.querySelector('.rellax'))){
+    let rellax = new Rellax('.rellax');
+}
+
+// -----------------------------------------
+//             NAVBAR
+// -----------------------------------------
+
+$(document).ready(function(){
+    $(".hamburger").click(function(){
+        $(this).toggleClass("is-active");
+    });
+});
+
+// -----------------------------------------
+//             PROJECT FILTER
+// -----------------------------------------
 
 $(document).ready(function(){
     $(".filter-button").click(function(){
@@ -37,13 +79,28 @@ $(document).ready(function(){
     });
 });
 
-
 // -----------------------------------------
-//             NAVBAR
+//             PROJECT MODAL
 // -----------------------------------------
 
-$(document).ready(function(){
-    $(".hamburger").click(function(){
-        $(this).toggleClass("is-active");
-    });
-});
+const modal = document.querySelector('#my-modal');
+const modalBtn = document.querySelector('#modal-btn');
+const closeBtn = document.querySelector('.close');
+
+modalBtn.addEventListener('click', openModal);
+closeBtn.addEventListener('click', closeModal);
+window.addEventListener('click', outsideClick);
+
+function openModal() {
+    $(modal).show(200);
+}
+
+function closeModal() {
+    $(modal).hide(200);
+}
+
+function outsideClick(e) {
+    if (e.target == modal) {
+        $(modal).hide(200);
+    }
+}

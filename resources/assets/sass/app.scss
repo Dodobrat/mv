@@ -7,7 +7,91 @@
 
 body{
   background-color: $light;
+  overflow-x: hidden;
 }
+
+h1, h2, h3, h4, h5, h6{
+  color: $primary-font-color;
+}
+
+.preloader {
+  z-index: 9999;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  transition: 0.4s ease-in-out;
+  pointer-events: none;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  .preloader-chasing-squares {
+    width: 50px;
+    height: 50px;
+    line-height: 19px;
+    .square{
+      display: inline-block;
+      width: 15px;
+      height: 15px;
+      opacity: 1;
+      background: #666;
+      animation: focusfade .7s infinite;
+      &:nth-child(1) {
+      }
+      &:nth-child(2) {
+        animation-delay: .175s;
+      }
+      &:nth-child(3) {
+        animation-delay: .525s;
+      }
+      &:nth-child(4) {
+        animation-delay: .35s;
+      }
+    }
+  }
+}
+
+@keyframes focusfade {
+  0% {
+    opacity: 0.5;
+    background: #000;
+  }
+  30% {
+    opacity: 0.5;
+    background: #666;
+  }
+  60% {
+    opacity: 0;
+  }
+  75% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0.5;
+    background: #000;
+  }
+}
+
+
+//-------------------------------------------
+//          LANDING IMAGE
+//-------------------------------------------
+
+.landing-image-container{
+  width: 100vw;
+  height: 50vh;
+  overflow: hidden;
+  .landing-image{
+    width: 100%;
+    height: 60vh;
+    object-fit: cover;
+  }
+}
+
 
 
 //-------------------------------------------
@@ -18,7 +102,8 @@ body{
   background: $light-grey;
 
   .navbar-brand {
-
+    color: $primary-font-color;
+    text-transform: uppercase;
   }
 
   .navbar-toggler {
@@ -81,11 +166,27 @@ body{
 .filter-section{
   text-align: center;
   button{
+    transition: 0.3s ease-in-out;
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid rgba(0,0,0,0);
+    border-radius: 0;
     padding: 10px 15px;
     color: $brand-primary;
+    &:focus{
+      outline: none;
+    }
+    &:hover{
+      border-bottom: 2px solid rgba(0,0,0,0.5);
+    }
   }
   .active{
+    transition: 0.3s ease-in-out;
     color: #6c757d;
+    border-bottom: 2px solid rgba(0,0,0,0.9);
+    &:hover{
+      border-bottom: 2px solid rgba(0,0,0,0.9);
+    }
   }
 }
 
@@ -104,24 +205,6 @@ body{
       position: relative;
       border-radius: 0;
     }
-    .card-overlay-title{
-      transition: 0.2s ease-in-out;
-      opacity: 0;
-      font-weight: 600;
-      font-size: 25px;
-      text-align: center;
-      text-transform: uppercase;
-      position: absolute;
-      margin: 0;
-      padding: 0;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%,-50%);
-      .card-overlay-second{
-        font-weight: 100;
-        font-size: 18px;
-      }
-    }
     .overlay{
       pointer-events: none;
       position: absolute;
@@ -132,13 +215,78 @@ body{
       justify-content: center;
       align-items: center;
       background-color: rgba(255,255,255,0.5);
-    }
-    &:hover{
       .card-overlay-title{
-        transition: 0.2s ease-in-out;
-        opacity: 1;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        text-transform: uppercase;
+        .card-overlay-second{
+          font-size: 16px;
+          font-weight: 300;
+        }
       }
     }
+  }
+}
+
+
+
+
+//-------------------------------------------
+//          PROJECT MODAL
+//-------------------------------------------
+
+.button {
+  background: #428bca;
+  padding: 1em 2em;
+  color: #fff;
+  border: 0;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.button:hover {
+  background: #3876ac;
+}
+
+.custom-modal {
+  display: none;
+  position: fixed;
+  z-index: 10000;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.custom-modal-content {
+  padding: 20px;
+  background-color: $light;
+  margin: 0;
+  width: 100%;
+  min-height: 100vh;
+  animation-name: modalopen;
+  animation-duration: 0.5s;
+}
+
+.close {
+  float: left;
+  padding: 10px;
+  &:hover{
+    cursor: pointer;
+  }
+}
+
+@keyframes modalopen {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 

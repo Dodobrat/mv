@@ -13,6 +13,16 @@
 </head>
 <body>
 
+<div class="preloader" id="preloader">
+    <div class="preloader-chasing-squares">
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+    </div>
+</div>
+
+
 @if (Route::currentRouteName() == 'index')
 
     <div class="landing-image-container">
@@ -21,7 +31,7 @@
         {{ Settings::getFile('index_landing_image') }}
         @else
         {{ asset('#') }}
-        @endif" alt="" class="landing-image">
+        @endif" alt="" class="landing-image rellax" data-rellax-speed="-5">
     </div>
 
 @endif
@@ -31,7 +41,13 @@
         {{ config('app.name', 'Mirage Visualisation') }}
     </a>
 
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#mobileMenu"
+            aria-controls="mobileMenu"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
         <div class="hamburger" id="hamburger-1">
             <span class="line"></span>
             <span class="line"></span>
@@ -39,23 +55,16 @@
         </div>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+    <div class="collapse navbar-collapse" id="mobileMenu">
         <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
             <li class="nav-item">
-                <a class="nav-link" href="#">Home</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Disabled</a>
+                <a class="nav-link" href="{{ route('index') }}">{{ trans('front.home') }}</a>
             </li>
         </ul>
     </div>
 </nav>
 
     @yield('content')
-
 
     <script src="{{ mix('/js/app.js') }}"></script>
 </body>

@@ -2,6 +2,7 @@
 
 namespace App\Modules\Categories\Models;
 
+use App\Modules\Projects\Models\Project;
 use Dimsav\Translatable\Translatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Kalnoy\Nestedset\NodeTrait;
@@ -47,5 +48,9 @@ class Category extends AdminModel {
     public function scopeActive($query)
     {
         return $query->where($this->table . '.visible', 1);
+    }
+
+    public function projects(){
+        return $this->hasMany(Project::class, 'id', 'project_id');
     }
 }
