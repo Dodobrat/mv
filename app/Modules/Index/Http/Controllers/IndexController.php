@@ -13,7 +13,7 @@ class IndexController extends Controller
     public function index() {
 
         $categories = Category::active()->reversed()->get();
-        $projects = Project::active()->reversed()->with(['media','category'])->get();
+        $projects = Project::active()->reversed()->with(['media'])->get();
 
         return view('index::front.index',compact('categories','projects'));
     }

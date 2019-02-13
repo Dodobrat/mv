@@ -83,24 +83,31 @@ $(document).ready(function(){
 //             PROJECT MODAL
 // -----------------------------------------
 
-const modal = document.querySelector('#my-modal');
-const modalBtn = document.querySelector('#modal-btn');
-const closeBtn = document.querySelector('.close');
+const modal = document.querySelectorAll('#my-modal');
+const modalBtn = document.querySelectorAll('#modal-btn');
+const closeBtn = document.querySelectorAll('.close');
 
-modalBtn.addEventListener('click', openModal);
-closeBtn.addEventListener('click', closeModal);
+modalBtn.forEach( function (modalBtn) {
+    modalBtn.addEventListener('click', openModal);
+});
+closeBtn.forEach( function (closeBtn) {
+    closeBtn.addEventListener('click', closeModal);
+});
 window.addEventListener('click', outsideClick);
 
 function openModal() {
-    $(modal).show(200);
+    $(modal).slideDown(300);
+    document.querySelector('body').style.overflowY = 'hidden';
 }
 
 function closeModal() {
-    $(modal).hide(200);
+    $(modal).slideUp(300);
+    document.querySelector('body').style.overflowY = 'auto';
 }
 
 function outsideClick(e) {
     if (e.target == modal) {
-        $(modal).hide(200);
+        $(modal).slideUp(300);
+        document.querySelector('body').style.overflowY = 'auto';
     }
 }

@@ -227,6 +227,9 @@ h1, h2, h3, h4, h5, h6{
         }
       }
     }
+    &:hover{
+      cursor: pointer;
+    }
   }
 }
 
@@ -236,19 +239,6 @@ h1, h2, h3, h4, h5, h6{
 //-------------------------------------------
 //          PROJECT MODAL
 //-------------------------------------------
-
-.button {
-  background: #428bca;
-  padding: 1em 2em;
-  color: #fff;
-  border: 0;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.button:hover {
-  background: #3876ac;
-}
 
 .custom-modal {
   display: none;
@@ -261,23 +251,72 @@ h1, h2, h3, h4, h5, h6{
   overflow-x: hidden;
   overflow-y: auto;
   background-color: rgba(0, 0, 0, 0.5);
-}
-
-.custom-modal-content {
-  padding: 20px;
-  background-color: $light;
-  margin: 0;
-  width: 100%;
-  min-height: 100vh;
-  animation-name: modalopen;
-  animation-duration: 0.5s;
-}
-
-.close {
-  float: left;
-  padding: 10px;
-  &:hover{
-    cursor: pointer;
+  .custom-modal-content {
+    padding: 0;
+    background-color: $light;
+    margin: 0;
+    width: 100%;
+    min-height: 100vh;
+    animation-name: modalopen;
+    animation-duration: 0.5s;
+    .custom-modal-header{
+      padding: 0 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: $light;
+      .close {
+        font-weight: 100;
+        flex: 2;
+        text-align: left;
+        font-size: 70px;
+        text-shadow: none;
+        transform: rotateX(50deg);
+        line-height: 100%;
+        &:hover{
+          cursor: pointer;
+        }
+        &:focus{
+          outline: none;
+        }
+      }
+      h3{
+        text-transform: uppercase;
+        font-weight: 200;
+        flex: 10;
+        text-align: right;
+        margin: 0;
+      }
+    }
+    #project-view-container{
+      .project-view{
+        max-width: 100%;
+        width: auto;
+        overflow-x: auto;
+        box-sizing: border-box;
+        img{
+          display: block;
+          height: 75vh;
+          margin: auto;
+        }
+      }
+    }
+    #project-view-pills{
+      overflow-x: auto;
+      overflow-y:hidden;
+      flex-wrap: nowrap;
+      li{
+        a{
+          padding: 2px;
+          margin: 10px;
+          img{
+            height: 75px;
+            width: 125px;
+            object-fit: cover;
+          }
+        }
+      }
+    }
   }
 }
 
