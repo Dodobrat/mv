@@ -61,7 +61,7 @@
                 <a class="nav-link" href="{{ route('index') }}">{{ trans('front.home') }}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('index') }}">{{ trans('front.team') }}</a>
+                <a class="nav-link" href="{{ route('members.index') }}">{{ trans('front.team') }}</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('index') }}">{{ trans('front.contact') }}</a>
@@ -73,5 +73,56 @@
     @yield('content')
 
     <script src="{{ mix('/js/app.js') }}"></script>
+<script>
+
+    let modal = document.querySelector('#my-modal');
+    let ajaxLoader = document.querySelector('.loader-container');
+
+    function closeModal() {
+        $(modal).slideUp(300);
+        window.history.pushState({},"", '/');
+        document.querySelector('body').style.overflowY = 'auto';
+    }
+
+    function openModal(id, url, slug) {
+        let projectId = id;
+        let projectUrl = url;
+        let projectSlug = slug;
+
+        $.ajaxSetup({
+            cache: false,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: projectUrl,
+            method: 'post',
+            data: {
+                project_id: projectId,
+            },
+            beforeSend: function() {
+                ajaxLoader.style.display = 'flex';
+            },
+
+            success: function(result) {
+                if (result.errors.length != 0) {
+                    $('.alert-danger').html('');
+
+                    $.each(result.errors, function (key, value) {
+
+                    });
+                } else {
+                    ajaxLoader.style.display = 'none';
+                    window.history.pushState({},"", '/' + projectSlug);
+                    $(modal).slideDown(300);
+                    modal.innerHTML = result.project_modal;
+                    document.querySelector('body').style.overflowY = 'hidden';
+                }
+            }
+        });
+    }
+
+</script>
 </body>
 </html>

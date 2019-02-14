@@ -53,22 +53,27 @@ class ProjectsController extends BaseAdministrationController
             ->addColumn([
                 'data' => 'id',
                 'name' => 'id',
+                'orderable' => false,
                 'title' => trans('administration::administrators.id'),
             ])->addColumn([
                 'data' => 'title',
                 'name' => 'title',
+                'orderable' => false,
                 'title' => trans('administration::administrators.name'),
             ])->addColumn([
                 'data' => 'category',
                 'name' => 'category',
+                'orderable' => false,
                 'title' => trans('projects::admin.category_id'),
             ])->addColumn([
                 'data' => 'visible',
                 'name' => 'visible',
+                'orderable' => false,
                 'title' => trans('projects::admin.visible'),
             ])->addColumn([
                 'data' => 'created_at',
                 'name' => 'created_at',
+                'orderable' => false,
                 'title' => trans('projects::admin.date'),
             ]);
         return view('administration::empty-listing', compact('table'));

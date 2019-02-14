@@ -11,8 +11,17 @@
 |
 */
 
-Route::group(['prefix' => 'members'], function () {
-    Route::get('/', function () {
-        dd('This is the Members module index page. Build something great!');
+Route::group([
+    'prefix' => \Mcamara\LaravelLocalization\Facades\LaravelLocalization::setLocale(),
+    //'middleware' => \Administration::routeMiddleware()
+], function () {
+    Route::group([
+        'prefix' => 'members',
+        'as' => 'members.'
+    ], function () {
+        Route::get('/', [
+            'as' => 'index',
+            'uses' => 'MembersController@index'
+        ]);
     });
 });

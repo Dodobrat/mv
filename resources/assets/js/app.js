@@ -38,6 +38,7 @@ AOS.init({
 
 $(function () {
     $('.portfolio-grid > .portfolio-grid-item').hoverdir();
+    $('.member-card-container > .member-card').hoverdir();
 });
 
 // -----------------------------------------
@@ -83,31 +84,3 @@ $(document).ready(function(){
 //             PROJECT MODAL
 // -----------------------------------------
 
-const modal = document.querySelectorAll('#my-modal');
-const modalBtn = document.querySelectorAll('#modal-btn');
-const closeBtn = document.querySelectorAll('.close');
-
-modalBtn.forEach( function (modalBtn) {
-    modalBtn.addEventListener('click', openModal);
-});
-closeBtn.forEach( function (closeBtn) {
-    closeBtn.addEventListener('click', closeModal);
-});
-window.addEventListener('click', outsideClick);
-
-function openModal() {
-    $(modal).slideDown(300);
-    document.querySelector('body').style.overflowY = 'hidden';
-}
-
-function closeModal() {
-    $(modal).slideUp(300);
-    document.querySelector('body').style.overflowY = 'auto';
-}
-
-function outsideClick(e) {
-    if (e.target == modal) {
-        $(modal).slideUp(300);
-        document.querySelector('body').style.overflowY = 'auto';
-    }
-}

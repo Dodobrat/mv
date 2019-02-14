@@ -78,6 +78,63 @@ h1, h2, h3, h4, h5, h6{
 
 
 //-------------------------------------------
+//          AJAX LOADER
+//-------------------------------------------
+
+.loader-container{
+  z-index: 10001;
+  pointer-events: none;
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(255,255,255,0.7);
+  justify-content: center;
+  align-items: center;
+  #loader{
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    position: relative;
+    margin: 0 auto;
+    -webkit-perspective: 120px;
+    -moz-perspective: 120px;
+    -ms-perspective: 120px;
+    perspective: 120px;
+    &:before{
+      content: "";
+      position: absolute;
+      left: 25px;
+      top: 25px;
+      width: 50px;
+      height: 50px;
+      background-color: #666;
+      animation: flip 1s infinite;
+    }
+  }
+
+  @keyframes flip {
+    0% {
+      transform: rotate(0);
+    }
+
+    50% {
+      transform: rotateY(180deg);
+    }
+
+    100% {
+      transform: rotateY(180deg)  rotateX(180deg);
+    }
+  }
+}
+
+
+
+
+
+//-------------------------------------------
 //          LANDING IMAGE
 //-------------------------------------------
 
@@ -328,5 +385,60 @@ h1, h2, h3, h4, h5, h6{
     opacity: 1;
   }
 }
+
+
+//-------------------------------------------
+//          MEET THE TEAM GRID
+//-------------------------------------------
+
+.meet-the-team-section{
+  padding: 50px 0;
+  .member-card-container{
+    position: relative;
+    border-radius: 0;
+    border: none;
+    .member-card{
+      border: none;
+      border-radius: 0;
+      position: relative;
+      overflow: hidden;
+      .member-card-img{
+        border-radius: 0;
+        width: 100%;
+        height: 400px;
+        object-fit: cover;
+      }
+      .card-img-overlay{
+        top: -100%;
+        background-color: rgba(255,255,255,0.5);
+        pointer-events: none;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        .profile-pic{
+          width: 75%;
+          height: 150px;
+          object-fit: cover;
+          margin: 10px 0;
+        }
+        .card-title{
+          margin: 0;
+          padding: 10px 0;
+        }
+        .card-text{
+          margin: 0;
+          padding: 10px 0;
+        }
+      }
+    }
+  }
+}
+
+
+
 
 @import "responsive.scss";

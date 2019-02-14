@@ -50,18 +50,22 @@ class CategoriesController extends BaseAdministrationController {
             ->addColumn([
                 'data' => 'id',
                 'name' => 'id',
+                'orderable' => false,
                 'title' => trans('administration::administrators.id'),
             ])->addColumn([
                 'data' => 'title',
                 'name' => 'title',
+                'orderable' => false,
                 'title' => trans('administration::administrators.name'),
             ])->addColumn([
                 'data' => 'visible',
                 'name' => 'visible',
+                'orderable' => false,
                 'title' => trans('categories::admin.visible'),
             ])->addColumn([
                 'data' => 'created_at',
                 'name' => 'created_at',
+                'orderable' => false,
                 'title' => trans('categories::admin.date'),
             ]);
         return view('administration::empty-listing', compact('table'));
