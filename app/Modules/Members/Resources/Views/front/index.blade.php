@@ -32,13 +32,22 @@
                                      alt="">
                             @endif
 
-                            <h5 class="card-title">{{ $member->name }}</h5>
+                            <div class="custom-card-text">
+                                {!! $member->bio !!}
+                            </div>
 
-                            <p class="card-text">{{ $member->position }}</p>
 
                         </div>
+
+                    </div>
+                    <div class="card-box">
+                        <h5 class="card-title">{{ $member->name }}</h5>
+
+                        <p class="card-text">{{ $member->position }}</p>
                     </div>
                 </div>
+
+
 
             @endforeach
 

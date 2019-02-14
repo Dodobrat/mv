@@ -19,7 +19,7 @@
 
             @foreach($projects as $project)
 
-            <div class="card portfolio-grid-item filter {{ strtolower($project->category->title ) }}" data-aos="zoom-in">
+            <div class="card portfolio-grid-item filter {{ strtolower($project->category->title ) }}">
                 <a id="modal-btn"
                    onclick="openModal( '{{ $project->id }}','{{ route('projects.getProject') }}','{{ $project->slug }}')">
                     @if($project->media->isNotEmpty())

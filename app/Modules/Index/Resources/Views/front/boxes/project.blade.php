@@ -7,7 +7,7 @@
         <h3>{{ $project->title }}</h3>
     </div>
 
-    <div class="row justify-content-center align-items-center px-0 px-sm-0 px-md-0 px-lg-3 py-0 py-sm-0 py-md-3 py-lg-5">
+    <div class="row justify-content-center align-items-center px-0 px-sm-0 px-md-0 px-lg-3">
         <div class="col-12">
 
             <div class="tab-content" id="project-view-container">
