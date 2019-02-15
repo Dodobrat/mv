@@ -70,10 +70,17 @@
     </div>
 </nav>
 
+
+
     @yield('content')
 
     <script src="{{ mix('/js/app.js') }}"></script>
 <script>
+
+    // if (location.protocol !== "https:"){
+    //     location.replace(window.location.href.replace("http:",
+    //         "https:"));
+    // }
 
     let modal = document.querySelector('#my-modal');
     let ajaxLoader = document.querySelector('.loader-container');
@@ -114,7 +121,7 @@
                     });
                 } else {
                     ajaxLoader.style.display = 'none';
-                    window.history.pushState({},"", '/' + projectSlug);
+                    window.history.pushState({},"", '?' + projectSlug);
                     $(modal).slideDown(300);
                     modal.innerHTML = result.project_modal;
                     document.querySelector('body').style.overflowY = 'hidden';
@@ -122,6 +129,8 @@
             }
         });
     }
+
+
 
 </script>
 </body>
