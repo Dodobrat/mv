@@ -75,13 +75,12 @@
     @yield('content')
 
     <script src="{{ mix('/js/app.js') }}"></script>
-<script>
 
+<script>
     // if (location.protocol !== "https:"){
     //     location.replace(window.location.href.replace("http:",
     //         "https:"));
     // }
-
     let modal = document.querySelector('#my-modal');
     let ajaxLoader = document.querySelector('.loader-container');
 
@@ -129,9 +128,33 @@
             }
         });
     }
+</script>
 
+<script>
 
+        $(window).scroll(fetchPosts);
+        function fetchPosts() {
+            let page = $('.endless-pagination').data('next-page');
+            if(page !== null) {
+                clearTimeout( $.data( this, "scrollCheck" ) );
+                $.data( this, "scrollCheck", setTimeout(function() {
+                    let scroll_position_for_projects_load = $(window).height() + $(window).scrollTop() + 100;
+                    if(scroll_position_for_projects_load >= $(document).height()) {
+                        $.get(page, function(data){
+                            $('.portfolio-grid').append(data.projects);
+                            $('.endless-pagination').data('next-page', data.next_page);
+                            $('.portfolio-grid > .portfolio-grid-item').hoverdir();
+                            if (data.projects.length < 2100){
+                                $('.projects-loader-container').hide();
+                            }
+                        });
+                    }
+                }, 100));
+            }
+        }
 
 </script>
+
+
 </body>
 </html>

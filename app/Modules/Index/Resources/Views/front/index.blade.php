@@ -15,7 +15,7 @@
 
 
     <div class="container-fluid">
-        <div class="card-columns portfolio-grid">
+        <div class="card-columns portfolio-grid endless-pagination" data-next-page="{{ $projects->nextPageUrl() }}">
 
             @foreach($projects as $project)
 
@@ -48,7 +48,12 @@
         <div class="loader-container">
             <div id="loader"></div>
         </div>
+
+        <div class="projects-loader-container">
+            <div id="loader"></div>
+        </div>
     </div>
+
 
 
 
@@ -57,6 +62,6 @@
     </div>
 
 
-    <div style="height: 2000px;"></div>
+    {{--<div style="height: 2000px;"></div>--}}
 
 @endsection

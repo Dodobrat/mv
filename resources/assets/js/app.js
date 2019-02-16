@@ -37,7 +37,6 @@ AOS.init({
 // -----------------------------------------
 
 $(function () {
-    $('.portfolio-grid > .portfolio-grid-item').hoverdir();
     $('.member-card-container > .member-card').hoverdir();
 });
 
