@@ -13,35 +13,36 @@
         </div>
     </div>
 
-
     <div class="container-fluid">
-        <div class="card-columns portfolio-grid endless-pagination" data-next-page="{{ $projects->nextPageUrl() }}">
+        <div class="card-columns portfolio-grid endless-pagination" data-route="{{ route('index') }}" data-next-page="{{ $projects->count() }}">
 
-            @foreach($projects as $project)
+            {{--@foreach($projects as $project)--}}
 
-            <div class="card portfolio-grid-item filter {{ strtolower($project->category->title ) }}">
-                <a id="modal-btn"
-                   onclick="openModal( '{{ $project->id }}','{{ route('projects.getProject') }}','{{ $project->slug }}')">
-                    @if($project->media->isNotEmpty())
-                        <img src="{{ $project->media->first()->getPublicPath() }}" class="card-img-top" alt="...">
-                    @else
-                        <img src="https://via.placeholder.com/150C/O https://placeholder.com/" class="card-img-top" alt="...">
-                    @endif
-                </a>
-                <div class="overlay">
-                    <h4 class="card-overlay-title">
-                        {{ $project->title }}
-                        <br>
-                        <span class="card-overlay-second">
-                            {!! $project->description !!}
-                        </span>
-                    </h4>
+            {{--<div class="card portfolio-grid-item filter {{ strtolower($project->category->title ) }}">--}}
+                {{--<a id="modal-btn"--}}
+                   {{--onclick="openModal( '{{ $project->id }}','{{ route('projects.getProject') }}','{{ $project->slug }}')">--}}
+                    {{--@if($project->media->isNotEmpty())--}}
+                        {{--<img src="{{ $project->media->first()->getPublicPath() }}" class="card-img-top" alt="...">--}}
+                    {{--@else--}}
+                        {{--<img src="https://via.placeholder.com/150C/O https://placeholder.com/" class="card-img-top" alt="...">--}}
+                    {{--@endif--}}
+                {{--</a>--}}
+                {{--<div class="overlay">--}}
+                    {{--<h4 class="card-overlay-title">--}}
+                        {{--{{ $project->title }}--}}
+                        {{--<br>--}}
+                        {{--<span class="card-overlay-second">--}}
+                            {{--{!! $project->description !!}--}}
+                        {{--</span>--}}
+                    {{--</h4>--}}
 
-                </div>
+                {{--</div>--}}
 
-            </div>
+            {{--</div>--}}
 
-            @endforeach
+            {{--@endforeach--}}
+
+            @include('index::front.boxes.projects', compact($projects))
 
         </div>
 
@@ -58,7 +59,7 @@
 
 
     <div id="my-modal" class="custom-modal">
-        @include('index::front.boxes.project')
+{{--        @include('index::front.boxes.project')--}}
     </div>
 
 

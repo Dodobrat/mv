@@ -38,6 +38,7 @@ AOS.init({
 
 $(function () {
     $('.member-card-container > .member-card').hoverdir();
+    $('.portfolio-grid > .portfolio-grid-item').hoverdir();
 });
 
 // -----------------------------------------

@@ -2,7 +2,8 @@
 <html lang="{{ app()->getLocale() }}">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name', 'Mirage Visualisation') }}</title>
@@ -71,10 +72,9 @@
 </nav>
 
 
+@yield('content')
 
-    @yield('content')
-
-    <script src="{{ mix('/js/app.js') }}"></script>
+<script src="{{ mix('/js/app.js') }}"></script>
 
 <script>
     // if (location.protocol !== "https:"){
@@ -86,7 +86,7 @@
 
     function closeModal() {
         $(modal).slideUp(300);
-        window.history.pushState({},"", '/');
+        window.history.pushState({}, "", '/');
         document.querySelector('body').style.overflowY = 'auto';
     }
 
@@ -107,11 +107,11 @@
             data: {
                 project_id: projectId,
             },
-            beforeSend: function() {
+            beforeSend: function () {
                 ajaxLoader.style.display = 'flex';
             },
 
-            success: function(result) {
+            success: function (result) {
                 if (result.errors.length != 0) {
                     $('.alert-danger').html('');
 
@@ -120,7 +120,7 @@
                     });
                 } else {
                     ajaxLoader.style.display = 'none';
-                    window.history.pushState({},"", '?' + projectSlug);
+                    window.history.pushState({}, "", '?' + projectSlug);
                     $(modal).slideDown(300);
                     modal.innerHTML = result.project_modal;
                     document.querySelector('body').style.overflowY = 'hidden';
@@ -132,26 +132,46 @@
 
 <script>
 
-        $(window).scroll(fetchPosts);
-        function fetchPosts() {
-            let page = $('.endless-pagination').data('next-page');
-            if(page !== null) {
-                clearTimeout( $.data( this, "scrollCheck" ) );
-                $.data( this, "scrollCheck", setTimeout(function() {
-                    let scroll_position_for_projects_load = $(window).height() + $(window).scrollTop() + 100;
-                    if(scroll_position_for_projects_load >= $(document).height()) {
-                        $.get(page, function(data){
-                            $('.portfolio-grid').append(data.projects);
-                            $('.endless-pagination').data('next-page', data.next_page);
-                            $('.portfolio-grid > .portfolio-grid-item').hoverdir();
-                            if (data.projects.length < 2100){
-                                $('.projects-loader-container').hide();
-                            }
-                        });
+    $(window).scroll(fetchPosts);
+
+    function fetchPosts() {
+        let page = $('.endless-pagination').data('next-page');
+
+        clearTimeout($.data(this, "scrollCheck"));
+        $.data(this, "scrollCheck", setTimeout(function () {
+            let scroll_position_for_projects_load = $(window).height() + $(window).scrollTop() + 100;
+            let route = $('.endless-pagination').data('route');
+            if (scroll_position_for_projects_load >= $(document).height()) {
+                $.ajaxSetup({
+                    cache: false,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
-                }, 100));
+                });
+                $.ajax({
+                    url: route,
+                    method: 'post',
+                    data: {
+                        count : page
+                        // project_id: projectId,
+                    },
+                    beforeSend: function () {
+                        // $('.projects-loader-container').style.display = 'flex';
+                    },
+
+                    success: function (result) {
+                        // console.log(result.next_page);
+                        $('.portfolio-grid').append(result.projects);
+                        $('.endless-pagination').data('next-page', result.next_page);
+                        $('.portfolio-grid > .portfolio-grid-item').hoverdir();
+                        if (result.projects.length < 2100) {
+                            $('.projects-loader-container').hide();
+                        }
+                    }
+                });
             }
-        }
+        }, 100));
+    }
 
 </script>
 
