@@ -74,6 +74,10 @@
 
 @yield('content')
 
+<div id="my-modal" class="custom-modal">
+    @include('index::front.boxes.project')
+</div>
+
 <script src="{{ mix('/js/app.js') }}"></script>
 
 <script>
@@ -164,9 +168,8 @@
                         $('.portfolio-grid').append(result.projects);
                         $('.endless-pagination').data('next-page', result.next_page);
                         $('.portfolio-grid > .portfolio-grid-item').hoverdir();
-                        if (result.projects.length < 2100) {
-                            $('.projects-loader-container').hide();
-                        }
+                        $('.projects-loader-container').hide();
+
                     }
                 });
             }

@@ -1,3 +1,5 @@
+@if(!empty($project))
+
 <div class="custom-modal-content">
     <div class="custom-modal-header">
         <button class="close"
@@ -57,3 +59,5 @@
     </div>
 
 </div>
+
+    @endif

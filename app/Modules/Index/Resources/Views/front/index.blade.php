@@ -1,68 +1,64 @@
 @extends('layouts.app')
 @section('content')
 
-    <div class="container my-5">
-        <div class="filter-section justify-content-center align-items-center">
-            <button class="filter-button active" data-filter="all">All</button>
-            @foreach($categories as $category)
-                <button class="filter-button"
-                        data-filter="{{ strtolower($category->title) }}">
-                    {{ $category->title }}
-                </button>
-            @endforeach
-        </div>
+    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+        @foreach($types as $type)
+        <li class="nav-item">
+            <a class="nav-link {{ $loop->first ? 'active' : '' }}"
+               id="pills-{{ $type->id }}-tab"
+               data-toggle="pill"
+               href="#pills-{{ $type->id }}"
+               role="tab"
+               aria-controls="pills-{{ $type->id }}"
+               aria-selected="true"
+               onclick="">
+                {{ $type->title }}
+            </a>
+        </li>
+        @endforeach
+    </ul>
+
+    <div class="tab-content" id="pills-tabContent">
+        @foreach($types as $content)
+            <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}" id="pills-{{ $content->id }}" role="tabpanel" aria-labelledby="pills-{{ $content->id }}-tab">
+
+
+                <div class="container my-5">
+                    <div class="filter-section justify-content-center align-items-center">
+                        <button class="filter-button active" data-filter="{{ strtolower($content->id) }}">All</button>
+
+                        @foreach($content->categories as $category)
+                            <button class="filter-button"
+                                    data-filter="{{ strtolower($category->title) }}">
+                                {{ $category->title }}
+                            </button>
+                        @endforeach
+
+                    </div>
+                </div>
+
+                {{--{{ dd($content->projects) }}--}}
+
+                <div class="container-fluid">
+                    <div class="card-columns portfolio-grid endless-pagination" data-route="{{ route('index') }}" data-next-page="{{ $projects->count() }}">
+
+                        @include('index::front.boxes.projects', compact($projects))
+
+                    </div>
+
+                    <div class="loader-container">
+                        <div id="loader"></div>
+                    </div>
+
+                    <div class="projects-loader-container">
+                        <div id="loader"></div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        @endforeach
     </div>
-
-    <div class="container-fluid">
-        <div class="card-columns portfolio-grid endless-pagination" data-route="{{ route('index') }}" data-next-page="{{ $projects->count() }}">
-
-            {{--@foreach($projects as $project)--}}
-
-            {{--<div class="card portfolio-grid-item filter {{ strtolower($project->category->title ) }}">--}}
-                {{--<a id="modal-btn"--}}
-                   {{--onclick="openModal( '{{ $project->id }}','{{ route('projects.getProject') }}','{{ $project->slug }}')">--}}
-                    {{--@if($project->media->isNotEmpty())--}}
-                        {{--<img src="{{ $project->media->first()->getPublicPath() }}" class="card-img-top" alt="...">--}}
-                    {{--@else--}}
-                        {{--<img src="https://via.placeholder.com/150C/O https://placeholder.com/" class="card-img-top" alt="...">--}}
-                    {{--@endif--}}
-                {{--</a>--}}
-                {{--<div class="overlay">--}}
-                    {{--<h4 class="card-overlay-title">--}}
-                        {{--{{ $project->title }}--}}
-                        {{--<br>--}}
-                        {{--<span class="card-overlay-second">--}}
-                            {{--{!! $project->description !!}--}}
-                        {{--</span>--}}
-                    {{--</h4>--}}
-
-                {{--</div>--}}
-
-            {{--</div>--}}
-
-            {{--@endforeach--}}
-
-            @include('index::front.boxes.projects', compact($projects))
-
-        </div>
-
-        <div class="loader-container">
-            <div id="loader"></div>
-        </div>
-
-        <div class="projects-loader-container">
-            <div id="loader"></div>
-        </div>
-    </div>
-
-
-
-
-    <div id="my-modal" class="custom-modal">
-{{--        @include('index::front.boxes.project')--}}
-    </div>
-
-
-    {{--<div style="height: 2000px;"></div>--}}
 
 @endsection
