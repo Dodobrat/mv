@@ -13,6 +13,8 @@ class CategoryForm extends AdminForm
             'translate' => true,
         ]);
 
+        $this->addSeoFields();
+
         $this->add('visible', 'checkbox', [
             'label' => trans('categories::admin.visible'),
             'value' => 1,

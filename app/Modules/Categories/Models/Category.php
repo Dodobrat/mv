@@ -21,6 +21,10 @@ class Category extends AdminModel {
      */
     public $translatedAttributes = [
         'title',
+        'meta_title',
+        'meta_description',
+        'meta_keywords',
+        'slug',
     ];
     protected $table = 'categories';
     /**

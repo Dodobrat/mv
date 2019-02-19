@@ -27,6 +27,10 @@ class CreateTypesTable extends Migration
             $table->increments('id');
             $table->integer('type_id')->unsigned();
             $table->string('title');
+            $table->string('meta_title')->nullable()->default(null);
+            $table->string('meta_description')->nullable()->default(null);
+            $table->string('meta_keywords')->nullable()->default(null);
+            $table->string('slug');
             $table->string('locale')->index();
             $table->unique([
                 'type_id',

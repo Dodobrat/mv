@@ -14,6 +14,8 @@ class TypeForm extends AdminForm
             'translate' => true,
         ]);
 
+        $this->addSeoFields();
+
         $categories = Category::all()->pluck('title', 'id')->toArray();
 
         $this->add('categories', 'select', [
