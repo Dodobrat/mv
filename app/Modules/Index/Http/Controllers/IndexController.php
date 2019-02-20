@@ -37,13 +37,17 @@ class IndexController extends Controller
 
         $categories = Category::where('parent_id',null)->with(['projects'])->active()->reversed()->get();
 
-        foreach ($categories as $category){
-            $sub_categories = $category->children->where('visible',1 , 'parent_id', $category->id);
+        if (!empty($categories) && $categories->isNotEmpty()){
+            foreach ($categories as $category){
+                $sub_categories = $category->children->where('visible',1);
+            }
+            foreach ($sub_categories as $sub_category){
+                $projects = $sub_category->projects->where('visible',1);
+            }
         }
 
-        foreach ($sub_categories as $sub_category){
-            $projects = $sub_category->projects->where('visible',1);
-        }
+
+
 
 
 

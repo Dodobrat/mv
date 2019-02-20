@@ -3,7 +3,6 @@
 namespace App\Modules\Categories\Models;
 
 use App\Modules\Projects\Models\Project;
-use App\Modules\Types\Models\Type;
 use Dimsav\Translatable\Translatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Kalnoy\Nestedset\NodeTrait;

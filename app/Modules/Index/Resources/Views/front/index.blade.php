@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('content')
 
+@if($categories->count() > 0)
     <div class="main-categories-section">
         <div class="row justify-content-center align-items-center">
 
@@ -17,6 +18,8 @@
         </div>
     </div>
 
+
+
     <div class="sub-categories-section">
         <ul class="sub-categories">
 
@@ -25,6 +28,7 @@
         </ul>
     </div>
 
+
     <div class="container-fluid">
         <div class="card-columns portfolio-grid endless-pagination">
 
@@ -32,6 +36,6 @@
 
         </div>
     </div>
-
+@endif
 
 @endsection
