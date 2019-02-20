@@ -1,64 +1,37 @@
 @extends('layouts.app')
 @section('content')
 
-    {{--<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">--}}
-        {{--@foreach($types as $type)--}}
-        {{--<li class="nav-item">--}}
-            {{--<a class="nav-link {{ $loop->first ? 'active' : '' }}"--}}
-               {{--id="pills-{{ $type->slug }}-tab"--}}
-               {{--data-toggle="pill"--}}
-               {{--href="#pills-{{ $type->slug }}"--}}
-               {{--role="tab"--}}
-               {{--aria-controls="pills-{{ $type->slug }}"--}}
-               {{--aria-selected="true"--}}
-               {{--onclick="">--}}
-                {{--{{ $type->title }}--}}
-            {{--</a>--}}
-        {{--</li>--}}
-        {{--@endforeach--}}
-    {{--</ul>--}}
+    <div class="main-categories-section">
+        <div class="row justify-content-center align-items-center">
 
-    {{--<div class="tab-content" id="pills-tabContent">--}}
-        {{--@foreach($types as $content)--}}
-            {{--<div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}" id="pills-{{ $content->slug }}" role="tabpanel" aria-labelledby="pills-{{ $content->slug }}-tab">--}}
+            @foreach($categories as $category)
 
+                <div class="col-6">
+                    <button class="main-category-btn">
+                        {{ $category->title }}
+                    </button>
+                </div>
 
-                {{--<div class="container my-5">--}}
-                    {{--<div class="filter-section justify-content-center align-items-center">--}}
-                        {{--<button class="filter-button active" data-filter="{{ strtolower($content->slug) }}">All</button>--}}
+            @endforeach
 
-                        {{--@foreach($content->categories as $category)--}}
-                            {{--<button class="filter-button"--}}
-                                    {{--data-filter="{{ strtolower($category->slug) }}">--}}
-                                {{--{{ $category->title }}--}}
-                            {{--</button>--}}
-                        {{--@endforeach--}}
+        </div>
+    </div>
 
-                    {{--</div>--}}
-                {{--</div>--}}
+    <div class="sub-categories-section">
+        <ul class="sub-categories">
 
-                {{--{{ dd($content->projects) }}--}}
+            @include('index::front.boxes.sub_categories', compact($sub_categories))
 
-                {{--<div class="container-fluid">--}}
-                    {{--<div class="card-columns portfolio-grid endless-pagination" data-route="{{ route('index') }}" data-next-page="{{ $projects->count() }}">--}}
+        </ul>
+    </div>
 
-                        {{--@include('index::front.boxes.projects', compact($projects))--}}
+    <div class="container-fluid">
+        <div class="card-columns portfolio-grid endless-pagination">
 
-                    {{--</div>--}}
+            @include('index::front.boxes.projects', compact($projects))
 
-                    {{--<div class="loader-container">--}}
-                        {{--<div id="loader"></div>--}}
-                    {{--</div>--}}
+        </div>
+    </div>
 
-                    {{--<div class="projects-loader-container">--}}
-                        {{--<div id="loader"></div>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
-
-
-
-            {{--</div>--}}
-        {{--@endforeach--}}
-    {{--</div>--}}
 
 @endsection

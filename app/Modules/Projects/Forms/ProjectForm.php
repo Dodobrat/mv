@@ -21,7 +21,7 @@ class ProjectForm extends AdminForm
 
         $this->addSeoFields();
 
-        $categories = Category::withTrashed()->get()->pluck('title', 'id')->toArray();
+        $categories = Category::where('parent_id','!=',null)->get()->pluck('title', 'id')->toArray();
 
         $this->add('category_id', 'select', [
             'label' => trans('projects::admin.category_id'),

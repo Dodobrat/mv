@@ -9,4 +9,5 @@ return[
     'create' => 'Create',
     'title' => 'Title',
     'edit' => 'Edit',
+    'parent' => 'Hierarchy',
 ];

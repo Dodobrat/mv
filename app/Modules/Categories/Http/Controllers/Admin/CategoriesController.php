@@ -33,6 +33,13 @@ class CategoriesController extends BaseAdministrationController {
                     }
                     $actions .= Form::adminOrderButton($category);
                     return Form::adminEditButton(trans('administration::index.edit'), Administration::route('categories.edit', $category->id)) . $actions;
+                })->addColumn('parent', function ($category) {
+                    if ($category->parent_id == null){
+                        return 'Category';
+                    }else{
+                        return 'Sub Category';
+                    }
+                    return '';
                 })
                 ->addColumn('visible', function ($category) {
                     return Form::adminSwitchButton('visible', $category);
@@ -57,6 +64,11 @@ class CategoriesController extends BaseAdministrationController {
                 'name' => 'title',
                 'orderable' => false,
                 'title' => trans('administration::administrators.name'),
+            ])->addColumn([
+                'data' => 'parent',
+                'name' => 'parent',
+                'orderable' => false,
+                'title' => trans('categories::admin.parent'),
             ])->addColumn([
                 'data' => 'visible',
                 'name' => 'visible',

@@ -86,7 +86,7 @@
     //         "https:"));
     // }
     let modal = document.querySelector('#my-modal');
-    let ajaxLoader = document.querySelector('.loader-container');
+    // let ajaxLoader = document.querySelector('.loader-container');
 
     function closeModal() {
         $(modal).slideUp(300);
@@ -111,9 +111,9 @@
             data: {
                 project_id: projectId,
             },
-            beforeSend: function () {
-                ajaxLoader.style.display = 'flex';
-            },
+            // beforeSend: function () {
+            //     ajaxLoader.style.display = 'flex';
+            // },
 
             success: function (result) {
                 if (result.errors.length != 0) {
@@ -123,7 +123,7 @@
 
                     });
                 } else {
-                    ajaxLoader.style.display = 'none';
+                    // ajaxLoader.style.display = 'none';
                     window.history.pushState({}, "", '?' + projectSlug);
                     $(modal).slideDown(300);
                     modal.innerHTML = result.project_modal;
@@ -134,49 +134,49 @@
     }
 </script>
 
-<script>
+{{--<script>--}}
 
-    $(window).scroll(fetchPosts);
+    {{--$(window).scroll(fetchPosts);--}}
 
-    function fetchPosts() {
-        let page = $('.endless-pagination').data('next-page');
+    {{--function fetchPosts() {--}}
+        {{--let page = $('.endless-pagination').data('next-page');--}}
 
-        clearTimeout($.data(this, "scrollCheck"));
-        $.data(this, "scrollCheck", setTimeout(function () {
-            let scroll_position_for_projects_load = $(window).height() + $(window).scrollTop() + 100;
-            let route = $('.endless-pagination').data('route');
-            if (scroll_position_for_projects_load >= $(document).height()) {
-                $.ajaxSetup({
-                    cache: false,
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
-                $.ajax({
-                    url: route,
-                    method: 'post',
-                    data: {
-                        count : page
-                        // project_id: projectId,
-                    },
-                    beforeSend: function () {
-                        // $('.projects-loader-container').style.display = 'flex';
-                    },
+        {{--clearTimeout($.data(this, "scrollCheck"));--}}
+        {{--$.data(this, "scrollCheck", setTimeout(function () {--}}
+            {{--let scroll_position_for_projects_load = $(window).height() + $(window).scrollTop() + 100;--}}
+            {{--let route = $('.endless-pagination').data('route');--}}
+            {{--if (scroll_position_for_projects_load >= $(document).height()) {--}}
+                {{--$.ajaxSetup({--}}
+                    {{--cache: false,--}}
+                    {{--headers: {--}}
+                        {{--'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')--}}
+                    {{--}--}}
+                {{--});--}}
+                {{--$.ajax({--}}
+                    {{--url: route,--}}
+                    {{--method: 'post',--}}
+                    {{--data: {--}}
+                        {{--count : page--}}
+                        {{--// project_id: projectId,--}}
+                    {{--},--}}
+                    {{--beforeSend: function () {--}}
+                        {{--// $('.projects-loader-container').style.display = 'flex';--}}
+                    {{--},--}}
 
-                    success: function (result) {
-                        // console.log(result.next_page);
-                        $('.portfolio-grid').append(result.projects);
-                        $('.endless-pagination').data('next-page', result.next_page);
-                        $('.portfolio-grid > .portfolio-grid-item').hoverdir();
-                        $('.projects-loader-container').hide();
+                    {{--success: function (result) {--}}
+                        {{--// console.log(result.next_page);--}}
+                        {{--$('.portfolio-grid').append(result.projects);--}}
+                        {{--$('.endless-pagination').data('next-page', result.next_page);--}}
+                        {{--$('.portfolio-grid > .portfolio-grid-item').hoverdir();--}}
+                        {{--$('.projects-loader-container').hide();--}}
 
-                    }
-                });
-            }
-        },350));
-    }
+                    {{--}--}}
+                {{--});--}}
+            {{--}--}}
+        {{--},350));--}}
+    {{--}--}}
 
-</script>
+{{--</script>--}}
 
 
 </body>

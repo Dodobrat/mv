@@ -2,6 +2,7 @@
 
 namespace App\Modules\Categories\Forms;
 
+use App\Modules\Categories\Models\Category;
 use ProVision\Administration\Forms\AdminForm;
 
 class CategoryForm extends AdminForm
@@ -14,6 +15,14 @@ class CategoryForm extends AdminForm
         ]);
 
         $this->addSeoFields();
+
+        $categories = Category::where('parent_id',null)->get()->pluck('title', 'id')->toArray();
+
+        $this->add('parent_id', 'select', [
+            'label' => trans('categories::admin.parent_id'),
+            'choices' => $categories,
+            'selected' => @$this->model->parent_id
+        ]);
 
         $this->add('visible', 'checkbox', [
             'label' => trans('categories::admin.visible'),

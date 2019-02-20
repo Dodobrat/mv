@@ -30,8 +30,21 @@ class StoreCategoryRequest extends FormRequest
 
         foreach ($locales as $locale) {
             $trans[$locale . '.title'] = 'required|string';
+            $trans[$locale . '.meta_title'] = 'nullable|string';
+            $trans[$locale . '.meta_description'] = 'nullable|string';
+            $trans[$locale . '.meta_keywords'] = 'nullable|string';
+
+            if ($this->method() == 'PATCH' || $this->method() == 'PUT') {
+                $locale_alb = CategoryTranslation::where('category_id', $this->route('category'))->where('locale', $locale)->first();
+                if($this->has($locale.'.title') && !empty($locale_alb)) {
+                    $trans[$locale . '.slug'] = 'nullable|string|unique:categories_translations,slug,' . $locale_alb->id;
+                }
+            }else{
+                $trans[$locale.'.slug'] = 'nullable|string|unique:categories_translations,slug';
+            }
         }
 
+        $trans['parent_id'] = 'nullable|integer';
         $trans['visible'] = 'boolean';
 
         return $trans;

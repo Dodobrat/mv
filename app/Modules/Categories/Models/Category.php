@@ -32,6 +32,7 @@ class Category extends AdminModel {
      */
     protected $fillable = [
         'visible',
+        'parent_id'
     ];
     /**
      * The attributes that should be casted to native types.
@@ -55,11 +56,8 @@ class Category extends AdminModel {
         return $query->where($this->table . '.visible', 1);
     }
 
-    public function types(){
-        return $this->belongsToMany(Type::class, 'types_categories','category_id', 'type_id')->active();
-    }
-
-    public function projects(){
-        return $this->hasMany(Project::class, 'id', 'project_id');
+    public function projects()
+    {
+        return $this->hasMany(Project::class);
     }
 }

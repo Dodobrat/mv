@@ -60,33 +60,6 @@ $(document).ready(function(){
 });
 
 // -----------------------------------------
-//             PROJECT FILTER
-// -----------------------------------------
-
-$(document).ready(function(){
-    window.addEventListener('load',function () {
-        let initValue = document.querySelector('.filter-button').dataset.filter;
-
-        $(".filter").not('.'+ initValue).hide(200);
-        $('.filter').filter('.'+ initValue).show(200);
-    });
-    $(".filter-button").click(function(){
-        let value = $(this).attr('data-filter');
-        if(value == "all") {
-            $('.filter').show(200);
-        }
-        else {
-            $(".filter").not('.'+ value).hide(200);
-            $('.filter').filter('.'+ value).show(200);
-        }
-        if ($(".filter-button").removeClass("active")) {
-            $(this).removeClass("active");
-        }
-        $(this).addClass("active");
-    });
-});
-
-// -----------------------------------------
 //             PROJECT MODAL
 // -----------------------------------------
 

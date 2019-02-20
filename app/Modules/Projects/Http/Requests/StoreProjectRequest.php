@@ -46,7 +46,7 @@ class StoreProjectRequest extends FormRequest
         }
 
         $trans['visible'] = 'boolean';
-        $trans['category_id'] = 'required';
+        $trans['category_id'] = 'required|integer';
 
         return $trans;
     }
