@@ -21,7 +21,8 @@ class CategoryForm extends AdminForm
         $this->add('parent_id', 'select', [
             'label' => trans('categories::admin.parent_id'),
             'choices' => $categories,
-            'selected' => @$this->model->parent_id
+            'selected' => @$this->model->parent_id,
+            'empty_value' => ' ',
         ]);
 
         $this->add('visible', 'checkbox', [

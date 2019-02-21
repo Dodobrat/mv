@@ -9,5 +9,6 @@ return[
     'create' => 'Create',
     'title' => 'Title',
     'edit' => 'Edit',
-    'parent_id' => 'Hierarchy',
+    'parent_id' => 'Parent',
+    'parent' => 'Parent',
 ];

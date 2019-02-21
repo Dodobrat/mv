@@ -80,6 +80,9 @@
 
 <script src="{{ mix('/js/app.js') }}"></script>
 
+@yield('cats')
+@yield('projects')
+
 <script>
     // if (location.protocol !== "https:"){
     //     location.replace(window.location.href.replace("http:",

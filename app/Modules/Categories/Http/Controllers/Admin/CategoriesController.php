@@ -31,13 +31,11 @@ class CategoriesController extends BaseAdministrationController {
                     } else {
                         $actions .= Form::adminDeleteButton(trans('administration::index.delete'), Administration::route('categories.destroy', $category->id));
                     }
-                    $actions .= Form::adminOrderButton($category);
+//                    $actions .= Form::adminOrderButton($category);
                     return Form::adminEditButton(trans('administration::index.edit'), Administration::route('categories.edit', $category->id)) . $actions;
                 })->addColumn('parent', function ($category) {
-                    if ($category->parent_id == null){
-                        return 'Category';
-                    }else{
-                        return 'Sub Category';
+                    if ($category->parent_id != null){
+                        return $category->parent->title;
                     }
                     return '';
                 })

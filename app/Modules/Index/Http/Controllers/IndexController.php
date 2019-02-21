@@ -13,7 +13,7 @@ class IndexController extends Controller
 
 //    protected $projects_per_page = 4;
 
-    public function index(Request $request) {
+    public function index(Request $request, $slug = null) {
 
 //        $count = 0;
 //
@@ -35,22 +35,27 @@ class IndexController extends Controller
 //            ];
 //        }
 
-        $categories = Category::where('parent_id',null)->with(['projects'])->active()->reversed()->get();
+        $categories = Category::where('parent_id',null)->active()->reversed()->get();
 
-        if (!empty($categories) && $categories->isNotEmpty()){
-            foreach ($categories as $category){
-                $sub_categories = $category->children->where('visible',1);
-            }
-            foreach ($sub_categories as $sub_category){
-                $projects = $sub_category->projects->where('visible',1);
-            }
+        $current_category = $categories->first();
+        if (!empty($slug)) {
+            $current_category = Category::whereTranslation('slug', $slug)->first();
         }
 
+        $sub_categories = $current_category->children()->with(['projects'])->reversed()->get();
 
+        $current_sub_category = $sub_categories->first();
+        if (!empty($slug)) {
+            $current_sub_category = Category::whereTranslation('slug', $slug)->first();
+        }
 
-
-
+        $projects = Project::active()->where('category_id',$current_sub_category->id)->reversed()->get();
 
         return view('index::front.index',compact('categories','sub_categories','projects'));
     }
+
+
+
+
+
 }
