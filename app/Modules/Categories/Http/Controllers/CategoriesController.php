@@ -15,13 +15,13 @@ class CategoriesController extends Controller
         $errors = [];
 
         if (empty($request->get('category_slug'))) {
-            $errors[] = 'nqma slug';
+            $errors[] = trans('index::errors.slug_error');
         }
 
         $category = Category::whereTranslation('slug', $request->get('category_slug'))->first();
 
         if (empty($category)) {
-            $errors[] = 'nqma categoriq';
+            $errors[] = trans('index::errors.category_error');
         }
 
         $sub_categories = new Collection();
@@ -37,13 +37,13 @@ class CategoriesController extends Controller
         $errors = [];
 
         if (empty($request->get('sub_category_slug'))) {
-            $errors[] = 'nqma slug';
+            $errors[] = trans('index::errors.sub_slug_error');
         }
 
         $sub_category = Category::whereTranslation('slug', $request->get('sub_category_slug'))->first();
 
         if (empty($sub_category)) {
-            $errors[] = 'nqma categoriq';
+            $errors[] = trans('index::errors.sub_cat_error');
         }
 
         $projects = new Collection();

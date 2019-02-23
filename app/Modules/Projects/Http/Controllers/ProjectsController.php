@@ -14,13 +14,13 @@ class ProjectsController extends Controller
         $errors = [];
 
         if (empty($request->get('project_id'))) {
-            $errors[] = trans('projects::front.error');
+            $errors[] = trans('index::errors.no_projects');
         }
 
         $project = Project::with(['media'])->where('id', $request->project_id)->first();
 
         if (empty($project)) {
-            $errors[] = trans('projects::front.error');
+            $errors[] = trans('index::errors.no_project');
         }
 
         return response()->json([

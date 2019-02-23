@@ -38,14 +38,53 @@ AOS.init({
 });
 
 // -----------------------------------------
+//             HIDE NAV ON SCROLL
+// -----------------------------------------
+
+// Hide Header on on scroll down
+let didScroll;
+let lastScrollTop = 0;
+let delta = 5;
+let navbarHeight = $('nav').outerHeight();
+
+$(window).scroll(function(event) {
+    didScroll = true;
+});
+
+setInterval(function() {
+    if (didScroll) {
+        hasScrolled();
+        didScroll = false;
+    }
+}, 250);
+
+function hasScrolled() {
+    let st = $(this).scrollTop();
+    if (Math.abs(lastScrollTop - st) <= delta)
+        return;
+    if (st > lastScrollTop && st > navbarHeight) {
+        // Scroll Down
+        $('nav').addClass('nav-up').removeClass('nav-down');
+    } else {
+        // Scroll Up
+        if (st + $(window).height() < $(document).height()) {
+            $('nav').removeClass('nav-up').addClass('nav-down');
+        }
+    }
+
+    lastScrollTop = st;
+}
+
+// -----------------------------------------
 //             AJAX CATEGORIES
 // -----------------------------------------
+let companyLogo = document.querySelector('.company-logo');
 let catCont = document.querySelector('.main-categories-section' );
 let cat = document.querySelectorAll('.main-category-btn' );
 let subCatsContainer = document.getElementById('subCatSection');
 let projectsContainer = document.getElementById('portfolio');
+$(".projects-heading").hide();
 $(".loading-container").hide();
-$(subCatsContainer).hide();
 $(projectsContainer).hide();
 
 cat.forEach(function (cat) {
@@ -81,11 +120,15 @@ cat.forEach(function (cat) {
                     //
                     // });
                 } else {
-                    $(subCatsContainer).show();
-                    window.history.pushState({},"", catRoute + '/' +catSlug);
+                    $(companyLogo).hide();
+                    $(".projects-heading").show();
+                    catCont.style.height = '21vh';
+                    $('nav').removeClass('nav-up').addClass('nav-down');
+                    catCont.style.marginTop = '56px';
+                    subCatsContainer.style.display = 'flex';
+                    // window.history.pushState({},"", catRoute + '/' +catSlug);
                     $(".loading-container").hide();
                     subCatsContainer.innerHTML = result.new_blade;
-                    catCont.style.height = '25vh';
 
                     let subCat = document.querySelectorAll('.sub-category-btn' );
 
@@ -125,7 +168,9 @@ cat.forEach(function (cat) {
                                         // });
                                     } else {
                                         $(projectsContainer).show();
-                                        window.history.pushState({},"", subCatRoute + '#'+ subCatSlug);
+                                        // window.history.pushState({},"", subCatRoute + '#'+ subCatSlug);
+                                        $(".sub-categories-heading").slideUp(300);
+                                        $(".projects-heading").slideUp(100);
                                         $(".loading-container").hide();
                                         projectsContainer.innerHTML = result.new_view;
                                         $('.portfolio-grid > .portfolio-grid-item').hoverdir();

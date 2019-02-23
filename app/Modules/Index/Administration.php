@@ -36,6 +36,11 @@ class Administration implements Module {
      */
     public function settings($module, Form $form)
     {
+        $form->add($module['slug'].'_company_logo', 'file', [
+            'label' => trans($module['slug'].'::admin.company_logo'),
+            'path' => '/uploads/settings/'.$module['slug'].'_company_logo/'
+        ]);
+
         $form->add($module['slug'].'_landing_image', 'file', [
             'label' => trans($module['slug'].'::admin.landing_image'),
             'path' => '/uploads/settings/'.$module['slug'].'_landing_image/'

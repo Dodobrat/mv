@@ -10,7 +10,6 @@
     {{--<link rel="icon" href="{{ asset('img/img_2.jpg') }}">--}}
     <link rel="stylesheet" href="{{ mix('/css/aos.css') }}">
     <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
-
 </head>
 <body>
 
@@ -23,54 +22,60 @@
     </div>
 </div>
 
+<nav class="navbar navbar-expand-lg navigation">
+    <div class="container">
+        <a class="navbar-brand" href="{{ route('index') }}">
+            <img src="
+        @if(!empty(Settings::getFile('index_nav_logo')))
+            {{ Settings::getFile('index_nav_logo') }}
+            @else
+            {{ asset('img/dark-logo.png') }}
+            @endif" alt="" class="navbar-image">
+        </a>
 
-{{--@if (Route::currentRouteName() == 'index')--}}
+        <button class="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#mobileMenu"
+                aria-controls="mobileMenu"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+            <div class="hamburger" id="hamburger-1">
+                <span class="line"></span>
+                <span class="line"></span>
+                <span class="line"></span>
+            </div>
+        </button>
 
-    {{--<div class="landing-image-container">--}}
-        {{--<img src="--}}
-        {{--@if(!empty(Settings::getFile('index_landing_image')))--}}
-        {{--{{ Settings::getFile('index_landing_image') }}--}}
-        {{--@else--}}
-        {{--{{ asset('#') }}--}}
-        {{--@endif" alt="" class="landing-image rellax" data-rellax-speed="-5">--}}
-    {{--</div>--}}
-
-{{--@endif--}}
-
-<nav class="navbar sticky-top navbar-expand-lg navigation">
-    <a class="navbar-brand" href="{{ route('index') }}">
-        {{ config('app.name', 'Mirage Visualisation') }}
-    </a>
-
-    <button class="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#mobileMenu"
-            aria-controls="mobileMenu"
-            aria-expanded="false"
-            aria-label="Toggle navigation">
-        <div class="hamburger" id="hamburger-1">
-            <span class="line"></span>
-            <span class="line"></span>
-            <span class="line"></span>
+        <div class="collapse navbar-collapse" id="mobileMenu">
+            <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('index') }}">{{ trans('front.home') }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('members.index') }}">{{ trans('front.team') }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('index') }}">{{ trans('front.contact') }}</a>
+                </li>
+            </ul>
         </div>
-    </button>
-
-    <div class="collapse navbar-collapse" id="mobileMenu">
-        <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('index') }}">{{ trans('front.home') }}</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('members.index') }}">{{ trans('front.team') }}</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('index') }}">{{ trans('front.contact') }}</a>
-            </li>
-        </ul>
     </div>
 </nav>
 
+@if (Route::currentRouteName() == 'index')
+    <div class="company-logo">
+        <img src="
+        @if(!empty(Settings::getFile('index_company_logo')))
+            {{ Settings::getFile('index_company_logo') }}
+        @else
+            {{ asset('img/logo.png') }}
+        @endif" alt="" class="company-image">
+        <p class="company-name">
+            {{ config('app.name', 'Mirage Visualisation') }}
+        </p>
+    </div>
+@endif
 
 @yield('content')
 
@@ -81,21 +86,16 @@
 <script src="{{ mix('/js/app.js') }}"></script>
 
 <script>
-
     let modal = document.querySelector('#my-modal');
-    // let ajaxLoader = document.querySelector('.loader-container');
-
     function closeModal() {
         $(modal).slideUp(300);
         // window.history.pushState({}, "", '/');
         document.querySelector('body').style.overflowY = 'auto';
     }
-
     function openModal(id, url, slug) {
         let projectId = id;
         let projectUrl = url;
         let projectSlug = slug;
-
         $.ajaxSetup({
             cache: false,
             headers: {
@@ -123,19 +123,13 @@
                     $(".loading-container").hide();
                     // window.history.pushState({}, "", '/' + projectSlug);
                     $(modal).slideDown(300);
+                    document.querySelector('body').style.overflowY = 'hidden';
                     modal.innerHTML = result.project_modal;
                 }
             }
         });
     }
 </script>
-
-<script>
-
-
-
-</script>
-
 
 </body>
 </html>
