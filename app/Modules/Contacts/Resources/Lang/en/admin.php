@@ -1,0 +1,28 @@
+<?php
+
+return [
+    'module_name' => 'Contacts',
+    'add' => 'Add',
+    'list' => 'View all',
+    'title' => 'Title',
+    'date' => 'Created at',
+    'action' => 'Actions',
+    'description' => 'Description',
+    'status' => 'Status',
+    'active' => 'Active',
+    'inactive' => 'Inactive',
+    'position' => 'Position',
+    'other' => 'Other',
+    'parent' => 'Parent',
+    'create' => 'Create',
+    'select' => '== Select ==',
+    'edit' => 'Edit',
+    'email' => 'E-mail for Contact Form',
+    'start_time' => 'Working time - start',
+    'end_time' => 'Working time - end',
+    'city'  => 'City',
+    'address'  => 'Address',
+    'phone'  => 'Phone',
+    'working_time'  => 'Working Time',
+    'map'  => 'Map',
+];

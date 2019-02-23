@@ -1,4 +1,8 @@
 <?php
+/**
+ * Copyright (c) 2019. ProVision Media Group Ltd. <http://provision.bg>
+ * Venelin Iliev <http://veneliniliev.com>
+ */
 
 use Illuminate\Http\Request;
 
@@ -13,6 +17,6 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/contacts', function (Request $request) {
-    // return $request->contacts();
-})->middleware('auth:api');
+//Route::get('/contacts', function (Request $request) {
+//    // return $request->contacts();
+//})->middleware('auth:api');

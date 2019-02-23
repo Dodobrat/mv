@@ -41,6 +41,7 @@ class IndexController extends Controller
         }
 
         if($current_category != null){
+
             $sub_categories = $current_category->children()->get();
 
             $current_sub_category = $sub_categories->first();

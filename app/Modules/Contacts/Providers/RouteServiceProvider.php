@@ -1,9 +1,13 @@
 <?php
+/**
+ * Copyright (c) 2019. ProVision Media Group Ltd. <http://provision.bg>
+ * Venelin Iliev <http://veneliniliev.com>
+ */
 
 namespace App\Modules\Contacts\Providers;
 
-use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
 class RouteServiceProvider extends ServiceProvider
 {

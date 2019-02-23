@@ -6,7 +6,7 @@
         <button class="sub-category-btn"
                 data-slug="{{ $sub_category->slug }}"
                 data-url="{{ route('categories.getProjects') }}"
-                data-route="{{ route('index',['slug' => $category->slug]) }}"
+                data-route="{{ route('index') }}"
                 >
             {{ $sub_category->title }}
         </button>

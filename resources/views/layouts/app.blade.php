@@ -22,7 +22,7 @@
     </div>
 </div>
 
-<nav class="navbar navbar-expand-lg navigation">
+<nav class="navbar navbar-expand-lg navigation @if(Route::currentRouteName() == 'index') nav-up @endif">
     <div class="container">
         <a class="navbar-brand" href="{{ route('index') }}">
             <img src="

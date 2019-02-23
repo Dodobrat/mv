@@ -3,6 +3,7 @@
 
 <div class="meet-the-team-section">
     <div class="container">
+
         <div class="row justify-content-center align-items-center">
 
             @foreach($members as $member)

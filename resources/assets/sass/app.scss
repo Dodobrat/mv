@@ -230,7 +230,7 @@ h1, h2, h3, h4, h5, h6{
   z-index: 5000;
   background: $light-grey;
   position: fixed;
-  top: -56px;
+  top: 0;
   width: 100%;
   .navbar-brand {
     margin: 0;
@@ -592,6 +592,7 @@ h1, h2, h3, h4, h5, h6{
 //-------------------------------------------
 
 .meet-the-team-section{
+  margin: 10vh auto 0 auto;
   padding: 50px 0;
   .member-card-container{
     position: relative;

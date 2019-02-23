@@ -1,18 +1,29 @@
 <?php
+/**
+ * Copyright (c) 2019. ProVision Media Group Ltd. <http://provision.bg>
+ * Venelin Iliev <http://veneliniliev.com>
+ */
 
 /*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| This file is where you may define all of the routes that are handled
-| by your module. Just tell Laravel the URIs it should respond
-| to using a Closure or controller method. Build something great!
-|
+* Public
 */
+Route::group([
+    'prefix' => \Mcamara\LaravelLocalization\Facades\LaravelLocalization::setLocale(),
+    //'middleware' => \Administration::routeMiddleware()
+], function () {
+    Route::group([
+        'prefix' => 'contacts',
+        'as' => 'contacts.'
+    ], function () {
+        Route::get('/{slug?}', [
+            'as' => 'index',
+            'uses' => 'ContactsController@index'
+        ]);
 
-Route::group(['prefix' => 'contacts'], function () {
-    Route::get('/', function () {
-        dd('This is the Contacts module index page. Build something great!');
+        Route::post('/', [
+            'as' => 'store',
+            'uses' => 'ContactsController@store'
+        ]);
     });
 });
+

@@ -16,15 +16,15 @@ Route::group(['middleware' => ['web']], function () {
         'prefix' => \Mcamara\LaravelLocalization\Facades\LaravelLocalization::setLocale()
     ], function () {
 
-        Route::get('/{slug?}', [
+        Route::get('/', [
             'as' => 'index',
             'uses' => 'IndexController@index',
         ]);
 
-//        Route::post('/{slug?}', [
-//            'as' => 'index',
-//            'uses' => 'IndexController@index',
-//        ]);
+        Route::post('/', [
+            'as' => 'index',
+            'uses' => 'IndexController@index',
+        ]);
 
     });
 });
