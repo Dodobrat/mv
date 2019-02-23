@@ -49,7 +49,10 @@ class IndexController extends Controller
                 $current_sub_category = Category::whereTranslation('slug', $slug)->first();
             }
 
-            $projects = Project::active()->with(['media'])->where('category_id',$current_sub_category->id)->get();
+            if ($current_sub_category != null){
+                $projects = Project::active()->with(['media'])->where('category_id',$current_sub_category->id)->get();
+            }
+
         }
 
 

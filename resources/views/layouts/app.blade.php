@@ -56,7 +56,7 @@
                     <a class="nav-link" href="{{ route('members.index') }}">{{ trans('front.team') }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('index') }}">{{ trans('front.contact') }}</a>
+                    <a class="nav-link" href="{{ route('contacts.index') }}">{{ trans('front.contact') }}</a>
                 </li>
             </ul>
         </div>
