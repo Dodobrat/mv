@@ -48,7 +48,7 @@ class CategoriesController extends Controller
 
         $projects = new Collection();
         if (empty($errors)) {
-            $projects = Project::where('category_id', $sub_category->id)->get();
+            $projects = Project::where('category_id', $sub_category->id)->reversed()->get();
         }
 
         $new_projects = view('index::front.boxes.projects', compact('projects'))->render();

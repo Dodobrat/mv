@@ -18,11 +18,10 @@
 
                     <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }} project-view" id="pills-{{ $media->id }}" role="tabpanel" aria-labelledby="pills-{{ $media->id }}-tab">
                         @if(!empty($media))
-                            <img src="{{ $media->getPublicPath() }}">
+                            <img class="project-view-img" src="{{ $media->getPublicPath() }}">
                         @else
-                            <img src="https://via.placeholder.com/300C/O https://placeholder.com/" alt="">
+                            <img class="project-view-img" src="https://via.placeholder.com/300C/O https://placeholder.com/" alt="">
                         @endif
-
                     </div>
 
                 @endforeach

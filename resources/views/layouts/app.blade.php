@@ -24,18 +24,18 @@
 </div>
 
 
-@if (Route::currentRouteName() == 'index')
+{{--@if (Route::currentRouteName() == 'index')--}}
 
-    <div class="landing-image-container">
-        <img src="
-        @if(!empty(Settings::getFile('index_landing_image')))
-        {{ Settings::getFile('index_landing_image') }}
-        @else
-        {{ asset('#') }}
-        @endif" alt="" class="landing-image rellax" data-rellax-speed="-5">
-    </div>
+    {{--<div class="landing-image-container">--}}
+        {{--<img src="--}}
+        {{--@if(!empty(Settings::getFile('index_landing_image')))--}}
+        {{--{{ Settings::getFile('index_landing_image') }}--}}
+        {{--@else--}}
+        {{--{{ asset('#') }}--}}
+        {{--@endif" alt="" class="landing-image rellax" data-rellax-speed="-5">--}}
+    {{--</div>--}}
 
-@endif
+{{--@endif--}}
 
 <nav class="navbar sticky-top navbar-expand-lg navigation">
     <a class="navbar-brand" href="{{ route('index') }}">
@@ -80,20 +80,14 @@
 
 <script src="{{ mix('/js/app.js') }}"></script>
 
-@yield('cats')
-@yield('projects')
-
 <script>
-    // if (location.protocol !== "https:"){
-    //     location.replace(window.location.href.replace("http:",
-    //         "https:"));
-    // }
+
     let modal = document.querySelector('#my-modal');
     // let ajaxLoader = document.querySelector('.loader-container');
 
     function closeModal() {
         $(modal).slideUp(300);
-        window.history.pushState({}, "", '/');
+        // window.history.pushState({}, "", '/');
         document.querySelector('body').style.overflowY = 'auto';
     }
 
@@ -114,9 +108,9 @@
             data: {
                 project_id: projectId,
             },
-            // beforeSend: function () {
-            //     ajaxLoader.style.display = 'flex';
-            // },
+            beforeSend: function () {
+                $(".loading-container").show();
+            },
 
             success: function (result) {
                 if (result.errors.length != 0) {
@@ -126,60 +120,21 @@
 
                     });
                 } else {
-                    // ajaxLoader.style.display = 'none';
-                    window.history.pushState({}, "", '?' + projectSlug);
+                    $(".loading-container").hide();
+                    // window.history.pushState({}, "", '/' + projectSlug);
                     $(modal).slideDown(300);
                     modal.innerHTML = result.project_modal;
-                    document.querySelector('body').style.overflowY = 'hidden';
                 }
             }
         });
     }
 </script>
 
-{{--<script>--}}
+<script>
 
-    {{--$(window).scroll(fetchPosts);--}}
 
-    {{--function fetchPosts() {--}}
-        {{--let page = $('.endless-pagination').data('next-page');--}}
 
-        {{--clearTimeout($.data(this, "scrollCheck"));--}}
-        {{--$.data(this, "scrollCheck", setTimeout(function () {--}}
-            {{--let scroll_position_for_projects_load = $(window).height() + $(window).scrollTop() + 100;--}}
-            {{--let route = $('.endless-pagination').data('route');--}}
-            {{--if (scroll_position_for_projects_load >= $(document).height()) {--}}
-                {{--$.ajaxSetup({--}}
-                    {{--cache: false,--}}
-                    {{--headers: {--}}
-                        {{--'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')--}}
-                    {{--}--}}
-                {{--});--}}
-                {{--$.ajax({--}}
-                    {{--url: route,--}}
-                    {{--method: 'post',--}}
-                    {{--data: {--}}
-                        {{--count : page--}}
-                        {{--// project_id: projectId,--}}
-                    {{--},--}}
-                    {{--beforeSend: function () {--}}
-                        {{--// $('.projects-loader-container').style.display = 'flex';--}}
-                    {{--},--}}
-
-                    {{--success: function (result) {--}}
-                        {{--// console.log(result.next_page);--}}
-                        {{--$('.portfolio-grid').append(result.projects);--}}
-                        {{--$('.endless-pagination').data('next-page', result.next_page);--}}
-                        {{--$('.portfolio-grid > .portfolio-grid-item').hoverdir();--}}
-                        {{--$('.projects-loader-container').hide();--}}
-
-                    {{--}--}}
-                {{--});--}}
-            {{--}--}}
-        {{--},350));--}}
-    {{--}--}}
-
-{{--</script>--}}
+</script>
 
 
 </body>

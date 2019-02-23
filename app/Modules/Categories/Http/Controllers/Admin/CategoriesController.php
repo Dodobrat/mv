@@ -22,7 +22,7 @@ class CategoriesController extends BaseAdministrationController {
      */
     public function index(Request $request) {
         if ($request->ajax()) {
-            $categories = Category::withTrashed()->reversed();
+            $categories = Category::withTrashed()->get();
             $datatables = Datatables::of($categories)
                 ->addColumn('action', function ($category) {
                     $actions = '';
@@ -32,6 +32,10 @@ class CategoriesController extends BaseAdministrationController {
                         $actions .= Form::adminDeleteButton(trans('administration::index.delete'), Administration::route('categories.destroy', $category->id));
                     }
 //                    $actions .= Form::adminOrderButton($category);
+                    if ($category->parent_id == null){
+                        $actions .= Form::mediaManager($category);
+                    }
+
                     return Form::adminEditButton(trans('administration::index.edit'), Administration::route('categories.edit', $category->id)) . $actions;
                 })->addColumn('parent', function ($category) {
                     if ($category->parent_id != null){

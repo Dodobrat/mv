@@ -1,6 +1,6 @@
 @foreach($projects as $project)
 
-    <div class="card portfolio-grid-item">
+    <div class="card portfolio-grid-item endless-pagination" data-aos="zoom-in">
         <a id="modal-btn"
            onclick="openModal( '{{ $project->id }}','{{ route('projects.getProject') }}','{{ $project->slug }}')">
             @if($project->media->isNotEmpty())
@@ -23,3 +23,4 @@
     </div>
 
 @endforeach
+

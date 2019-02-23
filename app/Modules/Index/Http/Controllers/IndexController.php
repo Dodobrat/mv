@@ -24,8 +24,6 @@ class IndexController extends Controller
 //        $skip = $count;
 //        $take = $count + $this->projects_per_page;
 
-//        $types = Type::active()->reversed()->with(['categories'])->get();
-//        $categories = Category::active()->reversed()->with(['projects'])->get();
 //        $projects = Project::active()->reversed()->with(['media','translations'])->skip($skip)->take($take)->get();
 
 //        if($request->ajax()) {
@@ -35,21 +33,24 @@ class IndexController extends Controller
 //            ];
 //        }
 
-        $categories = Category::where('parent_id',null)->active()->reversed()->get();
+        $categories = Category::where('parent_id',null)->active()->get();
 
         $current_category = $categories->first();
         if (!empty($slug)) {
             $current_category = Category::whereTranslation('slug', $slug)->first();
         }
 
-        $sub_categories = $current_category->children()->with(['projects'])->reversed()->get();
+        if($current_category != null){
+            $sub_categories = $current_category->children()->get();
 
-        $current_sub_category = $sub_categories->first();
-        if (!empty($slug)) {
-            $current_sub_category = Category::whereTranslation('slug', $slug)->first();
+            $current_sub_category = $sub_categories->first();
+            if (!empty($slug)) {
+                $current_sub_category = Category::whereTranslation('slug', $slug)->first();
+            }
+
+            $projects = Project::active()->with(['media'])->where('category_id',$current_sub_category->id)->get();
         }
 
-        $projects = Project::active()->where('category_id',$current_sub_category->id)->reversed()->get();
 
         return view('index::front.index',compact('categories','sub_categories','projects'));
     }

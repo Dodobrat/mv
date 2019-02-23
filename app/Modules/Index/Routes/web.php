@@ -21,5 +21,10 @@ Route::group(['middleware' => ['web']], function () {
             'uses' => 'IndexController@index',
         ]);
 
+//        Route::post('/{slug?}', [
+//            'as' => 'index',
+//            'uses' => 'IndexController@index',
+//        ]);
+
     });
 });
