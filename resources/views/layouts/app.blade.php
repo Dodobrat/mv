@@ -7,7 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name', 'Mirage Visualisation') }}</title>
-    {{--<link rel="icon" href="{{ asset('img/img_2.jpg') }}">--}}
+    <link rel="icon" href="{{ asset('img/dark-logo.png') }}">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,800,900&amp;subset=latin-ext" rel="stylesheet">
     <link rel="stylesheet" href="{{ mix('/css/aos.css') }}">
     <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
 </head>
@@ -26,10 +27,10 @@
     <div class="container">
         <a class="navbar-brand" href="{{ route('index') }}">
             <img src="
-        @if(!empty(Settings::getFile('index_nav_logo')))
-            {{ Settings::getFile('index_nav_logo') }}
+            @if(!empty(Settings::getFile('index_nav_logo')))
+                {{ Settings::getFile('index_nav_logo') }}
             @else
-            {{ asset('img/dark-logo.png') }}
+                {{ asset('img/dark-logo.png') }}
             @endif" alt="" class="navbar-image">
         </a>
 
@@ -83,6 +84,11 @@
     @include('index::front.boxes.project')
 </div>
 
+<div class="error-box">
+    <span class="warn">&#9888;</span>
+    <span class="error"></span>
+</div>
+
 <script src="{{ mix('/js/app.js') }}"></script>
 
 <script>
@@ -95,7 +101,7 @@
     function openModal(id, url, slug) {
         let projectId = id;
         let projectUrl = url;
-        let projectSlug = slug;
+        // let projectSlug = slug;
         $.ajaxSetup({
             cache: false,
             headers: {
@@ -114,15 +120,20 @@
 
             success: function (result) {
                 if (result.errors.length != 0) {
-                    $('.alert-danger').html('');
+                    $(".loading-container").hide();
+                    $(".error-box").show();
 
                     $.each(result.errors, function (key, value) {
-
+                        $('.error').html(result.errors);
                     });
+
+                    setTimeout(function(){
+                        $(".error-box").slideUp(300);
+                    }, 3000);
                 } else {
                     $(".loading-container").hide();
                     // window.history.pushState({}, "", '/' + projectSlug);
-                    $(modal).slideDown(300);
+                    $(modal).slideDown(500);
                     document.querySelector('body').style.overflowY = 'hidden';
                     modal.innerHTML = result.project_modal;
                 }

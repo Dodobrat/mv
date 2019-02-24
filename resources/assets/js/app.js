@@ -41,7 +41,6 @@ AOS.init({
 //             HIDE NAV ON SCROLL
 // -----------------------------------------
 
-// Hide Header on on scroll down
 let didScroll;
 let lastScrollTop = 0;
 let delta = 5;
@@ -94,7 +93,7 @@ cat.forEach(function (cat) {
 
         let catSlug = cat.dataset.slug;
         let catUrl = cat.dataset.url;
-        let catRoute = cat.dataset.route;
+        // let catRoute = cat.dataset.route;
 
         $.ajaxSetup({
             cache: false,
@@ -114,21 +113,26 @@ cat.forEach(function (cat) {
 
             success: function(result) {
                 if (result.errors.length != 0) {
-                    // $('.alert-danger').html('');
-                    //
-                    // $.each(result.errors, function (key, value) {
-                    //
-                    // });
+                    $(".loading-container").hide();
+                    $(".error-box").show();
+
+                    $.each(result.errors, function (key, value) {
+                        $('.error').html(result.errors);
+                    });
+
+                    setTimeout(function(){
+                        $(".error-box").slideUp(300);
+                    }, 3000);
                 } else {
                     $(companyLogo).hide();
-                    $(".projects-heading").show();
                     catCont.style.height = '21vh';
-                    $('nav').removeClass('nav-up').addClass('nav-down');
                     catCont.style.marginTop = '56px';
+                    $('nav').removeClass('nav-up').addClass('nav-down');
+                    $(".projects-heading").show();
                     subCatsContainer.style.display = 'flex';
-                    // window.history.pushState({},"", catRoute + '/' +catSlug);
                     $(".loading-container").hide();
                     subCatsContainer.innerHTML = result.new_blade;
+                    // window.history.pushState({},"", catRoute + '/' +catSlug);
 
                     let subCat = document.querySelectorAll('.sub-category-btn' );
 
@@ -141,7 +145,7 @@ cat.forEach(function (cat) {
 
                             let subCatSlug = subCat.dataset.slug;
                             let subCatUrl = subCat.dataset.url;
-                            let subCatRoute = subCat.dataset.route;
+                            // let subCatRoute = subCat.dataset.route;
 
                             $.ajaxSetup({
                                 cache: false,
@@ -161,21 +165,24 @@ cat.forEach(function (cat) {
 
                                 success: function(result) {
                                     if (result.errors.length != 0) {
-                                        // $('.alert-danger').html('');
-                                        //
-                                        // $.each(result.errors, function (key, value) {
-                                        //
-                                        // });
+                                        $(".loading-container").hide();
+                                        $(".error-box").show();
+
+                                        $.each(result.errors, function (key, value) {
+                                            $('.error').html(result.errors);
+                                        });
+
+                                        setTimeout(function(){
+                                            $(".error-box").slideUp(300);
+                                        }, 3000);
                                     } else {
                                         $(projectsContainer).show();
-                                        // window.history.pushState({},"", subCatRoute + '#'+ subCatSlug);
-                                        $(".sub-categories-heading").slideUp(300);
+                                        $(".sub-categories-heading").slideUp(500);
                                         $(".projects-heading").slideUp(100);
                                         $(".loading-container").hide();
                                         projectsContainer.innerHTML = result.new_view;
                                         $('.portfolio-grid > .portfolio-grid-item').hoverdir();
-
-
+                                        // window.history.pushState({},"", subCatRoute + '#'+ subCatSlug);
                                     }
                                 }
                             });
