@@ -82,14 +82,18 @@ let catCont = document.querySelector('.main-categories-section' );
 let cat = document.querySelectorAll('.main-category-btn' );
 let subCatsContainer = document.getElementById('subCatSection');
 let projectsContainer = document.getElementById('portfolio');
+let topProjectsContainer = document.getElementById('top-projects');
 $(".projects-heading").hide();
 $(".loading-container").hide();
 $(projectsContainer).hide();
+$(topProjectsContainer).hide();
+
 
 cat.forEach(function (cat) {
     cat.addEventListener('click',function () {
 
         $(cat).addClass("active").siblings().removeClass('active');
+        $(cat).removeClass("inactive").siblings().addClass('inactive');
 
         let catSlug = cat.dataset.slug;
         let catUrl = cat.dataset.url;
@@ -125,11 +129,11 @@ cat.forEach(function (cat) {
                     }, 3000);
                 } else {
                     $(companyLogo).hide();
-                    catCont.style.height = '21vh';
+                    catCont.style.height = '12vh';
                     catCont.style.marginTop = '56px';
                     $('nav').removeClass('nav-up').addClass('nav-down');
-                    $(".projects-heading").show();
                     subCatsContainer.style.display = 'flex';
+                    topProjectsContainer.style.display = 'block';
                     $(".loading-container").hide();
                     subCatsContainer.innerHTML = result.new_blade;
                     // window.history.pushState({},"", catRoute + '/' +catSlug);
@@ -176,6 +180,7 @@ cat.forEach(function (cat) {
                                             $(".error-box").slideUp(300);
                                         }, 3000);
                                     } else {
+                                        $(topProjectsContainer).hide();
                                         $(projectsContainer).show();
                                         $(".sub-categories-heading").slideUp(500);
                                         $(".projects-heading").slideUp(100);
@@ -207,6 +212,7 @@ cat.forEach(function (cat) {
 $(function () {
     $('.member-card-container > .member-card').hoverdir();
     $('.portfolio-grid > .portfolio-grid-item').hoverdir();
+    $('.top-portfolio-grid > .portfolio-grid-item').hoverdir();
 });
 
 // -----------------------------------------

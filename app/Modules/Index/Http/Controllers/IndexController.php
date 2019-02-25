@@ -32,6 +32,7 @@ class IndexController extends Controller
 //                'next_page' => $take
 //            ];
 //        }
+        $top_projects = Project::active()->special()->reversed()->with(['media'])->limit(9)->get();
 
         $categories = Category::where('parent_id',null)->active()->get();
 
@@ -56,7 +57,7 @@ class IndexController extends Controller
         }
 
 
-        return view('index::front.index',compact('categories','sub_categories','projects'));
+        return view('index::front.index',compact('categories','sub_categories','projects','top_projects'));
     }
 
 

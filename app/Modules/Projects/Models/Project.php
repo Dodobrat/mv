@@ -32,6 +32,7 @@ class Project extends AdminModel
      */
     protected $fillable = [
         'visible',
+        'special',
         'category_id'
     ];
     /**
@@ -41,6 +42,7 @@ class Project extends AdminModel
      */
     protected $casts = [
         'visible' => 'boolean',
+        'special' => 'boolean',
     ];
 
     protected $with = ['translations'];
@@ -54,6 +56,10 @@ class Project extends AdminModel
      */
     public function scopeActive($query) {
         return $query->where($this->table . '.visible', 1);
+    }
+
+    public function scopeSpecial($query) {
+        return $query->where($this->table . '.special', 1);
     }
 
     public function category() {

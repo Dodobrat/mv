@@ -35,6 +35,12 @@ class ProjectForm extends AdminForm
             'checked' => @$this->model->visible,
         ]);
 
+        $this->add('special', 'checkbox', [
+            'label' => trans('projects::admin.special'),
+            'value' => 1,
+            'checked' => @$this->model->special,
+        ]);
+
         $this->add('footer', 'admin_footer');
         $this->add('send', 'submit', [
             'label' => trans('administration::index.save'),
