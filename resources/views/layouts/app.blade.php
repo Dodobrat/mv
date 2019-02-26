@@ -60,6 +60,10 @@
                     <a class="nav-link" href="{{ route('contacts.index') }}">{{ trans('front.contact') }}</a>
                 </li>
             </ul>
+            <div class="language-switcher">
+                <a href="{{ LaravelLocalization::getLocalizedURL('en') }}" class="lang-link">EN</a> /
+                <a href="{{ LaravelLocalization::getLocalizedURL('fr') }}" class="lang-link">FR</a>
+            </div>
         </div>
     </div>
 </nav>
@@ -79,6 +83,29 @@
 @endif
 
 @yield('content')
+
+<footer class="footer @if(Route::currentRouteName() == 'index') hidden @endif">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-lg-4 col-md-6 col-sm-12 col-12">
+            <p class="footer-phone">
+                PHONE
+            </p>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12 col-12">
+            <p class="footer-email">
+                E_MAIL
+            </p>
+        </div>
+        <div class="col-lg-4 col-md-12 col-sm-12 col-12">
+            <p class="footer-social facebook">
+                fb
+            </p>
+        </div>
+        <div class="col-12">
+            <p class="copyright">&copy; {{ config('app.name', 'Mirage Visualisation') }}</p>
+        </div>
+    </div>
+</footer>
 
 <div id="my-modal" class="custom-modal">
     @include('index::front.boxes.project')
@@ -115,12 +142,12 @@
                 project_id: projectId,
             },
             beforeSend: function () {
-                $(".loading-container").show();
+                $(".spinner").show();
             },
 
             success: function (result) {
                 if (result.errors.length != 0) {
-                    $(".loading-container").hide();
+                    $(".spinner").hide();
                     $(".error-box").show();
 
                     $.each(result.errors, function (key, value) {
@@ -131,7 +158,7 @@
                         $(".error-box").slideUp(300);
                     }, 3000);
                 } else {
-                    $(".loading-container").hide();
+                    $(".spinner").hide();
                     // window.history.pushState({}, "", '/' + projectSlug);
                     $(modal).slideDown(500);
                     document.querySelector('body').style.overflowY = 'hidden';

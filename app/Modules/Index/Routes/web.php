@@ -11,9 +11,9 @@
 |
 */
 
-Route::group(['middleware' => ['web']], function () {
+//Route::group(['middleware' => ['web']], function () {
     Route::group([
-        'prefix' => \Mcamara\LaravelLocalization\Facades\LaravelLocalization::setLocale()
+        'prefix' => LaravelLocalization::setLocale(),
     ], function () {
 
         Route::get('/', [
@@ -27,4 +27,4 @@ Route::group(['middleware' => ['web']], function () {
         ]);
 
     });
-});
+//});

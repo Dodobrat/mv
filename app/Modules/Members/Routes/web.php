@@ -12,7 +12,7 @@
 */
 
 Route::group([
-    'prefix' => \Mcamara\LaravelLocalization\Facades\LaravelLocalization::setLocale(),
+    'prefix' => LaravelLocalization::setLocale(),
     //'middleware' => \Administration::routeMiddleware()
 ], function () {
     Route::group([

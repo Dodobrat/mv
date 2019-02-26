@@ -82,12 +82,12 @@ let catCont = document.querySelector('.main-categories-section' );
 let cat = document.querySelectorAll('.main-category-btn' );
 let subCatsContainer = document.getElementById('subCatSection');
 let projectsContainer = document.getElementById('portfolio');
+let footer = document.querySelector('.footer');
 let topProjectsContainer = document.getElementById('top-projects');
 $(".projects-heading").hide();
-$(".loading-container").hide();
+$(".spinner").hide();
 $(projectsContainer).hide();
 $(topProjectsContainer).hide();
-
 
 cat.forEach(function (cat) {
     cat.addEventListener('click',function () {
@@ -112,12 +112,12 @@ cat.forEach(function (cat) {
                 category_slug: catSlug,
             },
             beforeSend: function() {
-                $(".loading-container").show();
+                $(".spinner").show();
             },
 
             success: function(result) {
                 if (result.errors.length != 0) {
-                    $(".loading-container").hide();
+                    $(".spinner").hide();
                     $(".error-box").show();
 
                     $.each(result.errors, function (key, value) {
@@ -130,11 +130,12 @@ cat.forEach(function (cat) {
                 } else {
                     $(companyLogo).hide();
                     catCont.style.height = '12vh';
-                    catCont.style.marginTop = '56px';
+                    catCont.style.marginTop = '57px';
                     $('nav').removeClass('nav-up').addClass('nav-down');
+                    $(footer).removeClass('hidden').addClass('visible');
                     subCatsContainer.style.display = 'flex';
                     topProjectsContainer.style.display = 'block';
-                    $(".loading-container").hide();
+                    $(".spinner").hide();
                     subCatsContainer.innerHTML = result.new_blade;
                     // window.history.pushState({},"", catRoute + '/' +catSlug);
 
@@ -164,12 +165,12 @@ cat.forEach(function (cat) {
                                     sub_category_slug: subCatSlug,
                                 },
                                 beforeSend: function() {
-                                    $(".loading-container").show();
+                                    $(".spinner").show();
                                 },
 
                                 success: function(result) {
                                     if (result.errors.length != 0) {
-                                        $(".loading-container").hide();
+                                        $(".spinner").hide();
                                         $(".error-box").show();
 
                                         $.each(result.errors, function (key, value) {
@@ -184,7 +185,7 @@ cat.forEach(function (cat) {
                                         $(projectsContainer).show();
                                         $(".sub-categories-heading").slideUp(500);
                                         $(".projects-heading").slideUp(100);
-                                        $(".loading-container").hide();
+                                        $(".spinner").hide();
                                         projectsContainer.innerHTML = result.new_view;
                                         $('.portfolio-grid > .portfolio-grid-item').hoverdir();
                                         // window.history.pushState({},"", subCatRoute + '#'+ subCatSlug);
@@ -200,8 +201,24 @@ cat.forEach(function (cat) {
 });
 
 // -----------------------------------------
-//             MODAL HORIZONTAL DRAG
+//             MODAL
 // -----------------------------------------
+let modal = document.querySelector('#my-modal');
+
+$(document).keyup(function(e) {
+    // if (e.keyCode === 13) $('.save').click();     // enter
+    if (e.keyCode === 27){
+        $(modal).slideUp(300);
+        document.querySelector('body').style.overflowY = 'auto';
+    }
+    if (e.keyCode === 37){
+        // left arrow
+    }
+    if (e.keyCode === 39){
+        // right arrow
+    }
+
+});
 
 
 
@@ -210,7 +227,7 @@ cat.forEach(function (cat) {
 // -----------------------------------------
 
 $(function () {
-    $('.member-card-container > .member-card').hoverdir();
+    // $('.member-card-container > .member-card').hoverdir();
     $('.portfolio-grid > .portfolio-grid-item').hoverdir();
     $('.top-portfolio-grid > .portfolio-grid-item').hoverdir();
 });
