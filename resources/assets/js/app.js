@@ -253,3 +253,44 @@ $(document).ready(function(){
 // -----------------------------------------
 //             TEAM
 // -----------------------------------------
+// let member = document.querySelector('.member-info');
+
+// -----------------------------------------
+//             FOOTER COPY
+// -----------------------------------------
+let footPhone = document.querySelector('.footer-phone');
+let footEmail = document.querySelector('.footer-email');
+
+footPhone.onclick = function() {
+    document.execCommand("copy");
+};
+
+footPhone.addEventListener("copy", function(event) {
+    event.preventDefault();
+    if (event.clipboardData) {
+        event.clipboardData.setData("text/plain", footPhone.textContent);
+        // console.log(event.clipboardData.getData("text"));
+        $(".info-box").slideDown(200);
+        $('.info').html(event.clipboardData.getData("text"));
+        setTimeout(function(){
+            $(".info-box").slideUp(300);
+        }, 3000);
+    }
+});
+
+footEmail.onclick = function() {
+    document.execCommand("copy");
+};
+
+footEmail.addEventListener("copy", function(event) {
+    event.preventDefault();
+    if (event.clipboardData) {
+        event.clipboardData.setData("text/plain", footEmail.textContent);
+        // console.log(event.clipboardData.getData("text"));
+        $(".info-box").slideDown(200);
+        $('.info').html(event.clipboardData.getData("text"));
+        setTimeout(function(){
+            $(".info-box").slideUp(300);
+        }, 3000);
+    }
+});

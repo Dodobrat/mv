@@ -1,18 +1,12 @@
 <?php
-/**
- * Copyright (c) 2019. ProVision Media Group Ltd. <http://provision.bg>
- * Venelin Iliev <http://veneliniliev.com>
- */
 
 namespace App\Modules\Contacts\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
-use App\Modules\Business\Models\Businesses;
 use App\Modules\Contacts\Http\Requests\SendRequestContact;
 use App\Modules\Contacts\Models\Contacts;
-use App\Modules\Fitnesses\Models\Fitness;
-use Mail;
+use Illuminate\Support\Facades\Mail;
 use ProVision\Administration\Facades\Settings;
 use SEO;
 
@@ -59,7 +53,6 @@ class ContactsController extends Controller {
      */
     public function store(SendRequestContact $request) {
         $requestData = $request->validated();
-
 
         $contact = Contacts::first();
 

@@ -44,7 +44,9 @@ class ContactsController extends BaseAdministrationController
                         $actions .= Form::adminDeleteButton(trans('administration::index.delete'), Administration::route('contacts.destroy', $contact->id));
                     }
                     return Form::adminEditButton(trans('administration::index.edit'), Administration::route('contacts.edit', $contact->id)) . $actions;
-                });
+                })->addColumn('visible', function ($contact) {
+                    return Form::adminSwitchButton('visible', $contact);
+                });;
 
             return $datatables->make(true);
         }
@@ -61,15 +63,23 @@ class ContactsController extends BaseAdministrationController
             ->addColumn([
                 'data' => 'id',
                 'name' => 'id',
+                'orderable' => false,
                 'title' => trans('administration::administrators.id')
             ])->addColumn([
                 'data' => 'title',
                 'name' => 'title',
+                'orderable' => false,
                 'title' => trans('contacts::admin.title')
             ])->addColumn([
                 'data' => 'created_at',
                 'name' => 'created_at',
+                'orderable' => false,
                 'title' => trans('contacts::admin.date')
+            ])->addColumn([
+                'data' => 'visible',
+                'name' => 'visible',
+                'orderable' => false,
+                'title' => trans('projects::admin.visible'),
             ]);
 
         return view('administration::empty-listing', compact('table'));
@@ -107,9 +117,9 @@ class ContactsController extends BaseAdministrationController
     public function store(StoreRequestContact $request)
     {
         $contact = new Contacts();
-
+        $contact->lat = $request->validated()['map']['lat'];
+        $contact->lng = $request->validated()['map']['lng'];
         $data = $request->only(array_keys($request->rules()));
-
         $contact->fill($data);
         $contact->save();
         return \Redirect::route(Administration::routeName('contacts.index'));
@@ -168,8 +178,9 @@ class ContactsController extends BaseAdministrationController
     public function update(StoreRequestContact $request, $id)
     {
         $contact = Contacts::where('id', $id)->first();
+        $contact->lat = $request->validated()['map']['lat'];
+        $contact->lng = $request->validated()['map']['lng'];
         $data = $request->only(array_keys($request->rules()));
-
         $contact->fill($data);
         $contact->save();
         return \Redirect::route(Administration::routeName('contacts.index'));

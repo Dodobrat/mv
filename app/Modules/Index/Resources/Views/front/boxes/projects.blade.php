@@ -24,3 +24,57 @@
 
 @endforeach
 
+@section('project')
+
+    <script>
+        let modal = document.querySelector('#my-modal');
+        function closeModal() {
+            $(modal).slideUp(300);
+            // window.history.pushState({}, "", '/');
+            document.querySelector('body').style.overflowY = 'auto';
+        }
+        function openModal(id, url, slug) {
+            let projectId = id;
+            let projectUrl = url;
+            // let projectSlug = slug;
+            $.ajaxSetup({
+                cache: false,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: projectUrl,
+                method: 'post',
+                data: {
+                    project_id: projectId,
+                },
+                beforeSend: function () {
+                    $(".spinner").show();
+                },
+
+                success: function (result) {
+                    if (result.errors.length != 0) {
+                        $(".spinner").hide();
+                        $(".error-box").show();
+
+                        $.each(result.errors, function (key, value) {
+                            $('.error').html(result.errors);
+                        });
+
+                        setTimeout(function(){
+                            $(".error-box").slideUp(300);
+                        }, 3000);
+                    } else {
+                        $(".spinner").hide();
+                        // window.history.pushState({}, "", '/' + projectSlug);
+                        $(modal).slideDown(500);
+                        document.querySelector('body').style.overflowY = 'hidden';
+                        modal.innerHTML = result.project_modal;
+                    }
+                }
+            });
+        }
+    </script>
+
+    @endsection

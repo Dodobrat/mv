@@ -20,7 +20,6 @@ class ContactsTranslation extends AdminModelTranslations
         'email',
         'address',
         'working_time',
-        'skype',
         'phone',
         'description'
     ];

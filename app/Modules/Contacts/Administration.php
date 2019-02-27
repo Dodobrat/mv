@@ -62,6 +62,16 @@ class Administration implements Module {
      */
     public function settings($module, Form $form)
     {
+        $form->add($module['slug'] . '_phone', 'text', [
+            'label' => trans($module['slug'] . '::admin.phone'),
+            'translate' => false
+        ]);
+
+        $form->add($module['slug'] . '_email', 'email', [
+            'label' => trans($module['slug'] . '::admin.email'),
+            'translate' => false
+        ]);
+
         $form->add($module['slug'] . '_title', 'text', [
             'label' => trans($module['slug'] . '::admin.title'),
             'translate' => true
@@ -91,10 +101,10 @@ class Administration implements Module {
         ]);
 
 
-        $form->add($module['slug'].'_header_image', 'file', [
-            'label' => trans($module['slug'].'::admin.header_image'),
-//            'translate' => true,
-            'path' => '/uploads/settings/'.$module['slug'].'_header_image/'
-        ]);
+//        $form->add($module['slug'].'_header_image', 'file', [
+//            'label' => trans($module['slug'].'::admin.header_image'),
+////            'translate' => true,
+//            'path' => '/uploads/settings/'.$module['slug'].'_header_image/'
+//        ]);
     }
 }

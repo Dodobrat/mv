@@ -23,5 +23,9 @@ Route::group([
             'as' => 'index',
             'uses' => 'MembersController@index'
         ]);
+        Route::post('/ajax/getMember', [
+            'as' => 'getMember',
+            'uses' => 'MembersController@getMember'
+        ]);
     });
 });

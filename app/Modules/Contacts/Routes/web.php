@@ -15,7 +15,7 @@ Route::group([
         'prefix' => 'contacts',
         'as' => 'contacts.'
     ], function () {
-        Route::get('/{slug?}', [
+        Route::get('/', [
             'as' => 'index',
             'uses' => 'ContactsController@index'
         ]);

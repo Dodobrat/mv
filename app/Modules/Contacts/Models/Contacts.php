@@ -24,14 +24,14 @@ class Contacts extends AdminModel
         'address',
         'working_time',
         'phone',
-        'skype',
         'description'
     ];
     public $module = 'contacts';
 
     protected $fillable = [
         'visible',
-
+        'lat',
+        'long',
     ];
 
     protected $with = ['translations'];

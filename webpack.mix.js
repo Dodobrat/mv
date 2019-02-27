@@ -13,6 +13,7 @@ mix.js('resources/assets/js/app.js', 'public/js/app.js')
     .sass('resources/assets/sass/app.scss', 'public/css/app.css')
     .copy('resources/assets/images', 'public/img', true)
     .copy('resources/assets/fonts', 'public/font', true)
+    .copy('resources/assets/webfonts', 'public/webfonts', true)
     .version()
     .options({
         processCssUrls: false

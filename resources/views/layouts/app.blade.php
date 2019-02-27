@@ -9,6 +9,7 @@
     <title>{{ config('app.name', 'Mirage Visualisation') }}</title>
     <link rel="icon" href="{{ asset('img/dark-logo.png') }}">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,800,900&amp;subset=latin-ext" rel="stylesheet">
+    <link href="{{ asset('/font/fontawesome-free-5.7.2-web/css/all.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ mix('/css/aos.css') }}">
     <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
 </head>
@@ -86,23 +87,39 @@
 
 <footer class="footer @if(Route::currentRouteName() == 'index') hidden @endif">
     <div class="row justify-content-center align-items-center">
-        <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-            <p class="footer-phone">
-                PHONE
-            </p>
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-            <p class="footer-email">
-                E_MAIL
-            </p>
-        </div>
-        <div class="col-lg-4 col-md-12 col-sm-12 col-12">
-            <p class="footer-social facebook">
-                fb
-            </p>
+        @if( !empty(Settings::get('contacts_phone')) || !empty(Settings::get('contacts_email')) )
+            <div class="col-lg-4 col-md-6 col-sm-12 col-12 py-2">
+                <span class="footer-label">{{ trans('index::front.phone') }} : </span>
+                <span class="footer-phone" title="{{ trans('index::front.copy') }}">
+                    {{ Settings::get('contacts_phone') }}
+                </span>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 col-12 py-2">
+                <span class="footer-label">{{ trans('index::front.email') }} : </span>
+                <span class="footer-email" title="{{ trans('index::front.copy') }}">
+                    {{ Settings::get('contacts_email') }}
+                </span>
+            </div>
+        @endif
+        <div class="col-lg-4 col-md-12 col-sm-12 col-12 py-2">
+            @if(Settings::get(LaravelLocalization::getCurrentLocale().'.instagram_link'))
+                <a title="Instagram" class="footer-social instagram" href="{{ Settings::get(LaravelLocalization::getCurrentLocale().'.instagram_link') }}">
+                    <i class="fab fa-instagram" id="ig"></i>
+                </a>
+            @endif
+            @if(Settings::get(LaravelLocalization::getCurrentLocale().'.facebook_link'))
+                <a title="Facebook" class="footer-social facebook" href="{{ Settings::get(LaravelLocalization::getCurrentLocale().'.facebook_link') }}">
+                    <i class="fab fa-facebook-square" id="fb"></i>
+                </a>
+            @endif
+            @if(Settings::get(LaravelLocalization::getCurrentLocale().'.linkedin_link'))
+                <a title="LinkedIn" class="footer-social linkedin" href="{{ Settings::get(LaravelLocalization::getCurrentLocale().'.linkedin_link') }}">
+                    <i class="fab fa-linkedin" id="in"></i>
+                </a>
+            @endif
         </div>
         <div class="col-12">
-            <p class="copyright">&copy; {{ config('app.name', 'Mirage Visualisation') }}</p>
+            <p class="copyright">&copy; {{ config('app.name', 'Mirage Visualisation') }} | @php echo date("Y"); @endphp</p>
         </div>
     </div>
 </footer>
@@ -111,63 +128,28 @@
     @include('index::front.boxes.project')
 </div>
 
+<div id="member-modal" class="member-modal">
+    @include('members::front.boxes.member')
+</div>
+
 <div class="error-box">
     <span class="warn">&#9888;</span>
     <span class="error"></span>
 </div>
 
+<div class="success-box">
+    <span class="success"></span>
+</div>
+
+<div class="info-box">
+    <span class="info"></span> <span>{{ trans('index::front.copied') }}</span>
+</div>
+
 <script src="{{ mix('/js/app.js') }}"></script>
 
-<script>
-    let modal = document.querySelector('#my-modal');
-    function closeModal() {
-        $(modal).slideUp(300);
-        // window.history.pushState({}, "", '/');
-        document.querySelector('body').style.overflowY = 'auto';
-    }
-    function openModal(id, url, slug) {
-        let projectId = id;
-        let projectUrl = url;
-        // let projectSlug = slug;
-        $.ajaxSetup({
-            cache: false,
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        $.ajax({
-            url: projectUrl,
-            method: 'post',
-            data: {
-                project_id: projectId,
-            },
-            beforeSend: function () {
-                $(".spinner").show();
-            },
+@yield('project')
 
-            success: function (result) {
-                if (result.errors.length != 0) {
-                    $(".spinner").hide();
-                    $(".error-box").show();
-
-                    $.each(result.errors, function (key, value) {
-                        $('.error').html(result.errors);
-                    });
-
-                    setTimeout(function(){
-                        $(".error-box").slideUp(300);
-                    }, 3000);
-                } else {
-                    $(".spinner").hide();
-                    // window.history.pushState({}, "", '/' + projectSlug);
-                    $(modal).slideDown(500);
-                    document.querySelector('body').style.overflowY = 'hidden';
-                    modal.innerHTML = result.project_modal;
-                }
-            }
-        });
-    }
-</script>
+@yield('member')
 
 </body>
 </html>

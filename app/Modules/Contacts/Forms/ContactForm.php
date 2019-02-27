@@ -1,8 +1,4 @@
 <?php
-/**
- * Copyright (c) 2019. ProVision Media Group Ltd. <http://provision.bg>
- * Venelin Iliev <http://veneliniliev.com>
- */
 
 namespace App\Modules\Contacts\Forms;
 
@@ -48,7 +44,12 @@ class ContactForm extends AdminForm
 
         $this->add('map', 'address_picker', [
             'label' => trans('contacts::admin.map'),
+            'default_value' => [
+                'lat' => @$this->model->lat,
+                'lng' => @$this->model->long
+            ]
         ]);
+
 
         $this->add('visible', 'checkbox', [
             'label' => trans('projects::admin.visible'),

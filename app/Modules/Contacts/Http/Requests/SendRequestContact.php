@@ -1,8 +1,4 @@
 <?php
-/**
- * Copyright (c) 2019. ProVision Media Group Ltd. <http://provision.bg>
- * Venelin Iliev <http://veneliniliev.com>
- */
 
 namespace App\Modules\Contacts\Http\Requests;
 
@@ -28,14 +24,6 @@ class SendRequestContact extends FormRequest
     public function rules()
     {
         $trans = [];
-
-//        $trans['business'] = 'nullable|string';
-        $trans['first_name'] = 'required|string';
-        $trans['last_name'] = 'required|string';
-        $trans['phone'] = 'required|string';
-        $trans['email'] = 'required|email';
-        $trans['message'] = 'required|string';
-        $trans['g-recaptcha-response'] = 'required|captcha';
 
         return $trans;
     }

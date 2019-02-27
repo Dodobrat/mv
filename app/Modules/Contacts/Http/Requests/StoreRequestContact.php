@@ -41,6 +41,8 @@ class StoreRequestContact extends FormRequest
         }
 
         $trans['visible'] = 'boolean';
+        $trans['map'] = 'nullable|array';
+
         return $trans;
     }
 }
