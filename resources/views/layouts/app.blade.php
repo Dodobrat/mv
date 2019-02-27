@@ -62,8 +62,8 @@
                 </li>
             </ul>
             <div class="language-switcher">
-                <a href="{{ LaravelLocalization::getLocalizedURL('en') }}" class="lang-link">EN</a> /
-                <a href="{{ LaravelLocalization::getLocalizedURL('fr') }}" class="lang-link">FR</a>
+                <a href="{{ LaravelLocalization::getLocalizedURL('en') }}" class="lang-link @if(App::isLocale('en')) active @endif">EN</a> /
+                <a href="{{ LaravelLocalization::getLocalizedURL('fr') }}" class="lang-link @if(App::isLocale('fr')) active @endif">FR</a>
             </div>
         </div>
     </div>

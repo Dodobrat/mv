@@ -108,6 +108,9 @@ h1, h2, h3, h4, h5, h6{
       color: $brand-warning;
     }
   }
+  .active{
+    color: $brand-warning;
+  }
 }
 
 //-------------------------------------------
@@ -309,6 +312,12 @@ h1, h2, h3, h4, h5, h6{
           &:hover{
             transition: 0.2s ease-in-out;
             color: $brand-warning;
+          }
+        }
+        .active{
+          color: $brand-warning;
+          &:hover{
+            color: #8A7945;
           }
         }
       }
