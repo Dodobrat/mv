@@ -145,6 +145,19 @@
       }
     }
   }
+  .meet-the-team-section{
+    margin: 5vh auto 0 auto;
+    .member-card-container{
+      .member-info{
+        .card-box{
+          height: 100%;
+          .text-container{
+            opacity: 1;
+          }
+        }
+      }
+    }
+  }
   .member-modal {
     .member-modal-content {
       border: none;
