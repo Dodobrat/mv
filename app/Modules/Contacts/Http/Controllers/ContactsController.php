@@ -7,6 +7,7 @@ use App\Http\Requests;
 use App\Modules\Contacts\Http\Requests\SendRequestContact;
 use App\Modules\Contacts\Models\Contacts;
 use Illuminate\Support\Facades\Mail;
+use ProVision\Administration\Administration;
 use ProVision\Administration\Facades\Settings;
 use SEO;
 
@@ -48,28 +49,35 @@ class ContactsController extends Controller {
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param SendRequestContact $request
      * @return \Illuminate\Http\Response
      */
     public function store(SendRequestContact $request) {
-        $requestData = $request->validated();
-
-        $contact = Contacts::first();
-
-        if (!empty($contact)) {
-            $email = $contact->email;
+        $validator = \Validator::make($request->all(), [
+            'name' => 'required|max:50|min:2',
+            'email' => 'required|email',
+            'phone' => 'required|min:5|max:14',
+            'comment' => 'required|max:300',
+        ]);
+        if ($validator->fails())
+        {
+            return response()->json(['errors'=>$validator->errors()->all()]);
         }
 
-        if (!empty($email)) {
-            Mail::send('contacts::emails.send_admin_contacts', ['data' => $requestData],
-                function ($m) use ($requestData, $email) {
-                    $m->subject(trans('contacts::admin.mail_subject'));
-                    $m->to($email, trans('contacts::admin.module_name'));
-                });
-        }
+        $contact_id = $request->input('contact_id');
 
+        $contactInfo = Contacts::whereHas('translations', function ($query) use ($contact_id) {
+            $query->where('locale', Administration::getLanguage())
+                ->where('contacts_id', $contact_id);
+        })->first();
 
-        return redirect()->back()->withSuccess(trans('contacts::front.success_send'));
+        Mail::send('contacts::emails.send_mail', ['data' => $validator], function ($m) use ($validator, $contactInfo) {
+            $m->subject(trans('contacts::front.mail_subject'));
+            $m->to($contactInfo->email, trans('contacts::front.module_name'));
+        });
+
+        return response()->json(['success'=>trans('contacts::front.email_success')], 200);
+
     }
 
 }

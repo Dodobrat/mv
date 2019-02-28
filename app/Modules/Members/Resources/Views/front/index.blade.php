@@ -7,7 +7,8 @@
             @foreach($members as $member)
                 <div class="col-lg-4 col-md-5 col-sm-6 col-12 member-card-container py-2">
                     <div class="member-info"
-                         onclick="openMemberModal( '{{ $member->id }}','{{ route('members.getMember') }}')">
+                         onclick="openMemberModal( '{{ $member->id }}','{{ route('members.getMember') }}')"
+                        data-aos="fade-up">
                         @if($member->thumbnail_media->isNotEmpty())
                             <img class="member-img"
                                  src="{{ $member->thumbnail_media->first()->getPublicPath() }}"

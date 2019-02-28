@@ -46,7 +46,7 @@ class ContactForm extends AdminForm
             'label' => trans('contacts::admin.map'),
             'default_value' => [
                 'lat' => @$this->model->lat,
-                'lng' => @$this->model->long
+                'lng' => @$this->model->lng
             ]
         ]);
 

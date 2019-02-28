@@ -37,6 +37,11 @@ AOS.init({
     duration: 400
 });
 
+// let rellax = new Rellax('.rellax');
+
+
+
+
 // -----------------------------------------
 //             HIDE NAV ON SCROLL
 // -----------------------------------------
@@ -251,15 +256,73 @@ $(document).ready(function(){
 });
 
 // -----------------------------------------
-//             TEAM
+//             AJAX EMAIL
 // -----------------------------------------
-// let member = document.querySelector('.member-info');
+let contactForm = document.querySelector('.contact-email-form');
+if (document.body.contains(contactForm)) {
+    let url = contactForm.dataset.url;
+
+    $(document).ready(function () {
+        $('.submit-btn').on('click', function (e) {
+            let self = $(this);
+            e.preventDefault();
+            $.ajaxSetup({
+                cache: false,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: url,
+                method: 'post',
+                data: {
+                    name: self.closest(contactForm).find('input[name="name"]').val(),
+                    phone: self.closest(contactForm).find('input[name="phone"]').val(),
+                    email: self.closest(contactForm).find('input[name="email"]').val(),
+                    comment: self.closest(contactForm).find('textarea[name="comment"]').val(),
+                    contact_id: self.closest(contactForm).find('input[name="contact_id"]').val(),
+
+                },
+                beforeSend: function() {
+                    $('.submit-btn').addClass('loading');
+                },
+
+                success: function(result) {
+                    if (result.errors) {
+                        $('.submit-btn').removeClass('loading');
+                        $(".error-email-box").show();
+                        $('.errors').empty();
+                        $.each(result.errors, function (key, value) {
+                            $('.errors').append('<li>' + value + '</li>');
+                        });
+                        setTimeout(function(){
+                            $(".error-email-box").slideUp(300);
+                        }, 5000);
+                    } else {
+                        $('.submit-btn').removeClass('loading');
+                        $(".success-box").show();
+                        $.each(result, function (key, value) {
+                            $('.success').html(result.success);
+                        });
+                        setTimeout(function(){
+                            $(".success-box").slideUp(300);
+                        }, 10000);
+                        contactForm.classList.add('disabled');
+                    }
+                }});
+        });
+    });
+
+}
 
 // -----------------------------------------
 //             FOOTER COPY
 // -----------------------------------------
 let footPhone = document.querySelector('.footer-phone');
 let footEmail = document.querySelector('.footer-email');
+let contactAddress = document.querySelector('.contact-address');
+let contactMail = document.querySelector('.contact-mail');
+let contactPhone = document.querySelector('.contact-phone');
 
 footPhone.onclick = function() {
     document.execCommand("copy");
@@ -286,6 +349,57 @@ footEmail.addEventListener("copy", function(event) {
     event.preventDefault();
     if (event.clipboardData) {
         event.clipboardData.setData("text/plain", footEmail.textContent);
+        // console.log(event.clipboardData.getData("text"));
+        $(".info-box").slideDown(200);
+        $('.info').html(event.clipboardData.getData("text"));
+        setTimeout(function(){
+            $(".info-box").slideUp(300);
+        }, 3000);
+    }
+});
+
+contactAddress.onclick = function() {
+    document.execCommand("copy");
+};
+
+contactAddress.addEventListener("copy", function(event) {
+    event.preventDefault();
+    if (event.clipboardData) {
+        event.clipboardData.setData("text/plain", contactAddress.textContent);
+        // console.log(event.clipboardData.getData("text"));
+        $(".info-box").slideDown(200);
+        $('.info').html(event.clipboardData.getData("text"));
+        setTimeout(function(){
+            $(".info-box").slideUp(300);
+        }, 3000);
+    }
+});
+
+contactMail.onclick = function() {
+    document.execCommand("copy");
+};
+
+contactMail.addEventListener("copy", function(event) {
+    event.preventDefault();
+    if (event.clipboardData) {
+        event.clipboardData.setData("text/plain", contactMail.textContent);
+        // console.log(event.clipboardData.getData("text"));
+        $(".info-box").slideDown(200);
+        $('.info').html(event.clipboardData.getData("text"));
+        setTimeout(function(){
+            $(".info-box").slideUp(300);
+        }, 3000);
+    }
+});
+
+contactPhone.onclick = function() {
+    document.execCommand("copy");
+};
+
+contactPhone.addEventListener("copy", function(event) {
+    event.preventDefault();
+    if (event.clipboardData) {
+        event.clipboardData.setData("text/plain", contactPhone.textContent);
         // console.log(event.clipboardData.getData("text"));
         $(".info-box").slideDown(200);
         $('.info').html(event.clipboardData.getData("text"));

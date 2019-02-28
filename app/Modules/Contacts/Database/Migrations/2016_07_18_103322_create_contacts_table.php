@@ -31,7 +31,7 @@ class CreateContactsTable extends Migration
             $table->increments('id');
             $table->integer('contacts_id')->unsigned();
             $table->string('title')->nullable()->default(null);
-            $table->string('description')->nullable()->default(null);
+            $table->longText('description')->nullable()->default(null);
             $table->string('working_time')->nullable()->default(null);
             $table->text('address')->nullable()->default(null);
             $table->string('email')->nullable()->default(null);

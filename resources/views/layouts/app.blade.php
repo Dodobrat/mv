@@ -137,6 +137,10 @@
     <span class="error"></span>
 </div>
 
+<div class="error-email-box">
+    <div class="errors"></div>
+</div>
+
 <div class="success-box">
     <span class="success"></span>
 </div>
@@ -144,6 +148,7 @@
 <div class="info-box">
     <span class="info"></span> <span>{{ trans('index::front.copied') }}</span>
 </div>
+
 
 <script src="{{ mix('/js/app.js') }}"></script>
 

@@ -164,6 +164,21 @@
       width: 100vw;
     }
   }
+  .contacts-section{
+    .desc{
+      background-color: $light;
+      padding: 20px 0;
+      .contact-description{
+        padding: 20px 15px;
+        p{
+          width: 100%;
+        }
+      }
+    }
+    .contact-email{
+      width: 100%;
+    }
+  }
 }
 
 @media screen and (max-width: 500px) {
