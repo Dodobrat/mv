@@ -149,7 +149,6 @@
     <span class="info"></span> <span>{{ trans('index::front.copied') }}</span>
 </div>
 
-
 <script src="{{ mix('/js/app.js') }}"></script>
 
 @yield('project')

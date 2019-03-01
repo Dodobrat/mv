@@ -76,6 +76,30 @@
       font-weight: 400;
     }
   }
+  .error-email-box{
+    padding: 10px;
+    width: 95vw;
+    .errors{
+      font-size: 15px;
+      font-weight: 400;
+    }
+  }
+  .success-box{
+    padding: 10px;
+    width: 95vw;
+    .success{
+      font-size: 15px;
+      font-weight: 400;
+    }
+  }
+  .info-box{
+    padding: 10px;
+    width: 95vw;
+    .info{
+      font-size: 15px;
+      font-weight: 600;
+    }
+  }
   .main-categories-section{
     .main-category-btn{
       font-size: 3vw;

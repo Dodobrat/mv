@@ -260,6 +260,74 @@ $(document).ready(function(){
 // -----------------------------------------
 let contactForm = document.querySelector('.contact-email-form');
 if (document.body.contains(contactForm)) {
+
+// -----------------------------------------
+//             AJAX EMAIL VALIDATION
+// -----------------------------------------
+
+let nameField = document.querySelector('.name');
+let phoneField = document.querySelector('.phone');
+let emailField = document.querySelector('.email');
+let commentField = document.querySelector('.comment');
+let submitBtn = document.querySelector('.submit-btn');
+
+nameField.addEventListener('keyup',validateName);
+phoneField.addEventListener('keyup',validatePhone);
+emailField.addEventListener('keyup',validateEmail);
+commentField.addEventListener('keyup',validateComment);
+
+function validateName(){
+    const re = /^[a-zA-Z]{2,50}$/;
+
+    if(!re.test(nameField.value)){
+        nameField.style.borderBottom = '1px solid #BF5329';
+        submitBtn.style.pointerEvents = 'none';
+        submitBtn.style.opacity = '0.5';
+    }else{
+        nameField.style.borderBottom = '1px solid #2AB27B';
+        submitBtn.style.pointerEvents = 'unset';
+        submitBtn.style.opacity = 'unset';
+    }
+}
+function validatePhone(){
+    const re = /^[0-9\+\-]{5,14}$/;
+
+    if(!re.test(phoneField.value)){
+        phoneField.style.borderBottom = '1px solid #BF5329';
+        submitBtn.style.pointerEvents = 'none';
+        submitBtn.style.opacity = '0.5';
+    }else{
+        phoneField.style.borderBottom = '1px solid #2AB27B';
+        submitBtn.style.pointerEvents = 'unset';
+        submitBtn.style.opacity = 'unset';
+    }
+}
+function validateEmail(){
+    const re = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{1,6})$/;
+
+    if(!re.test(emailField.value)){
+        emailField.style.borderBottom = '1px solid #BF5329';
+        submitBtn.style.pointerEvents = 'none';
+        submitBtn.style.opacity = '0.5';
+    }else{
+        emailField.style.borderBottom = '1px solid #2AB27B';
+        submitBtn.style.pointerEvents = 'unset';
+        submitBtn.style.opacity = 'unset';
+    }
+}
+function validateComment(){
+    const re = /^[a-zA-Z0-9_\-\.\!\?\'\"\,\/\(\)\%\=\+\*\:\;\@]{20,300}$/;
+
+    if(!re.test(commentField.value)){
+        commentField.style.borderBottom = '1px solid #BF5329';
+        submitBtn.style.pointerEvents = 'none';
+        submitBtn.style.opacity = '0.5';
+    }else{
+        commentField.style.borderBottom = '1px solid #2AB27B';
+        submitBtn.style.pointerEvents = 'unset';
+        submitBtn.style.opacity = 'unset';
+    }
+}
     let url = contactForm.dataset.url;
 
     $(document).ready(function () {
@@ -358,53 +426,55 @@ footEmail.addEventListener("copy", function(event) {
     }
 });
 
-contactAddress.onclick = function() {
-    document.execCommand("copy");
-};
+if (document.body.contains(contactAddress,contactMail,contactPhone)) {
+    contactAddress.onclick = function() {
+        document.execCommand("copy");
+    };
 
-contactAddress.addEventListener("copy", function(event) {
-    event.preventDefault();
-    if (event.clipboardData) {
-        event.clipboardData.setData("text/plain", contactAddress.textContent);
-        // console.log(event.clipboardData.getData("text"));
-        $(".info-box").slideDown(200);
-        $('.info').html(event.clipboardData.getData("text"));
-        setTimeout(function(){
-            $(".info-box").slideUp(300);
-        }, 3000);
-    }
-});
+    contactAddress.addEventListener("copy", function(event) {
+        event.preventDefault();
+        if (event.clipboardData) {
+            event.clipboardData.setData("text/plain", contactAddress.textContent);
+            // console.log(event.clipboardData.getData("text"));
+            $(".info-box").slideDown(200);
+            $('.info').html(event.clipboardData.getData("text"));
+            setTimeout(function(){
+                $(".info-box").slideUp(300);
+            }, 3000);
+        }
+    });
 
-contactMail.onclick = function() {
-    document.execCommand("copy");
-};
+    contactMail.onclick = function() {
+        document.execCommand("copy");
+    };
 
-contactMail.addEventListener("copy", function(event) {
-    event.preventDefault();
-    if (event.clipboardData) {
-        event.clipboardData.setData("text/plain", contactMail.textContent);
-        // console.log(event.clipboardData.getData("text"));
-        $(".info-box").slideDown(200);
-        $('.info').html(event.clipboardData.getData("text"));
-        setTimeout(function(){
-            $(".info-box").slideUp(300);
-        }, 3000);
-    }
-});
+    contactMail.addEventListener("copy", function(event) {
+        event.preventDefault();
+        if (event.clipboardData) {
+            event.clipboardData.setData("text/plain", contactMail.textContent);
+            // console.log(event.clipboardData.getData("text"));
+            $(".info-box").slideDown(200);
+            $('.info').html(event.clipboardData.getData("text"));
+            setTimeout(function(){
+                $(".info-box").slideUp(300);
+            }, 3000);
+        }
+    });
 
-contactPhone.onclick = function() {
-    document.execCommand("copy");
-};
+    contactPhone.onclick = function() {
+        document.execCommand("copy");
+    };
 
-contactPhone.addEventListener("copy", function(event) {
-    event.preventDefault();
-    if (event.clipboardData) {
-        event.clipboardData.setData("text/plain", contactPhone.textContent);
-        // console.log(event.clipboardData.getData("text"));
-        $(".info-box").slideDown(200);
-        $('.info').html(event.clipboardData.getData("text"));
-        setTimeout(function(){
-            $(".info-box").slideUp(300);
-        }, 3000);
-    }
-});
+    contactPhone.addEventListener("copy", function(event) {
+        event.preventDefault();
+        if (event.clipboardData) {
+            event.clipboardData.setData("text/plain", contactPhone.textContent);
+            // console.log(event.clipboardData.getData("text"));
+            $(".info-box").slideDown(200);
+            $('.info').html(event.clipboardData.getData("text"));
+            setTimeout(function(){
+                $(".info-box").slideUp(300);
+            }, 3000);
+        }
+    });
+}

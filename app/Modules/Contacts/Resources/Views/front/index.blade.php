@@ -5,17 +5,12 @@
 
     <div class="contacts-section">
         <div class="row justify-content-center align-items-center">
-            <div class="col-12">
-                <h3 class="contact-title" data-aos="zoom-in">
-                    {{ $contact->title }}
-                </h3>
-            </div>
-            <div class="col-lg-7 col-md-11 col-sm-12 col-12 desc my-3">
+            <div class="col-lg-7 col-md-10 col-sm-11 col-11 desc">
                 <div class="contact-description">
                     {!! $contact->description !!}
                 </div>
             </div>
-            <div class="col-lg-5 col-md-11 col-sm-12 col-12">
+            <div class="col-lg-5 col-md-10 col-sm-10 col-11">
                 <div class="contact-email">
                     <h4 class="contact-email-title">
                         {{ trans('contacts::front.contact_us') }}
@@ -25,7 +20,7 @@
                         <div class="row py-4">
                             <div class="col-12">
                                 <div class="contact-email-name-field {{ $errors->has('names') ? ' has-error' : '' }}">
-                                    <input class="field"
+                                    <input class="field name"
                                            id="name_{{ $contact->id }}"
                                            type="text"
                                            name="name"
@@ -35,7 +30,7 @@
                             </div>
                             <div class="col-12">
                                 <div class="contact-email-phone-field {{ $errors->has('phone') ? ' has-error' : '' }}">
-                                    <input class="field"
+                                    <input class="field phone"
                                            id="phone_{{ $contact->id }}"
                                            type="text"
                                            name="phone"
@@ -44,7 +39,7 @@
                             </div>
                             <div class="col-12">
                                 <div class="contact-email-email-field {{ $errors->has('email') ? ' has-error' : '' }}">
-                                    <input class="field"
+                                    <input class="field email"
                                            id="email_{{ $contact->id }}"
                                            type="email"
                                            name="email"
