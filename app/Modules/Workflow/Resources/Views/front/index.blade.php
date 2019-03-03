@@ -9,8 +9,11 @@
         @else
             <img src="https://via.placeholder.com/500C/O https://placeholder.com/" alt="" class="workflow-img">
         @endif
+        <div class="workflow-desc">
+            {!! $work->description !!}
+        </div>
     </section>
 
-    @endforeach
+@endforeach
 
-    @endsection
+@endsection

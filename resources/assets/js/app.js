@@ -290,7 +290,7 @@ function validateName(){
     }
 }
 function validatePhone(){
-    const re = /^[0-9\+\-]{5,14}$/;
+    const re = /^[0-9\+\-\ ]{5,14}$/;
 
     if(!re.test(phoneField.value)){
         phoneField.style.borderBottom = '1px solid #BF5329';
@@ -316,7 +316,7 @@ function validateEmail(){
     }
 }
 function validateComment(){
-    const re = /^[a-zA-Z0-9_\-\.\!\?\'\"\,\/\(\)\%\=\+\*\:\;\@]{20,300}$/;
+    const re = /^[a-zA-Z0-9_\-\.\!\?\'\"\,\/\(\)\%\=\+\*\:\;\@\ \  ]{20,300}$/;
 
     if(!re.test(commentField.value)){
         commentField.style.borderBottom = '1px solid #BF5329';
@@ -384,7 +384,7 @@ function validateComment(){
 }
 
 // -----------------------------------------
-//             FOOTER COPY
+//             COPY
 // -----------------------------------------
 let footPhone = document.querySelector('.footer-phone');
 let footEmail = document.querySelector('.footer-email');

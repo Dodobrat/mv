@@ -11,4 +11,5 @@ return[
     'edit' => 'Edit',
     'title' => 'Title',
     'description' => 'Description',
+    'special' => 'Top Project',
 ];

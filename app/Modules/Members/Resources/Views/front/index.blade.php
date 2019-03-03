@@ -49,17 +49,13 @@
 @section('member')
     <script>
         let memberModal = document.getElementById('member-modal');
-
         window.addEventListener('click', function (e) {
             if (e.target == memberModal){
                 memberModal.style.right = '-100vw';
             }
         });
-
         function closeMemberModal() {
             memberModal.style.right = '-100vw';
-            // window.history.pushState({}, "", '/');
-            // document.querySelector('body').style.overflowY = 'auto';
         }
         function openMemberModal(id, url) {
             let memberId = id;
@@ -95,10 +91,7 @@
                         }, 3000);
                     } else {
                         $(".spinner").hide();
-                        // window.history.pushState({}, "", '/' + projectSlug);
-                        // $(memberModal).slideDown(300);
                         memberModal.style.right = '0';
-                        // document.querySelector('body').style.overflowY = 'hidden';
                         memberModal.innerHTML = result.member_modal;
                     }
                 }

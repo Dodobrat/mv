@@ -400,13 +400,12 @@ h1, h2, h3, h4, h5, h6{
   .inactive{
     text-shadow: none;
     transition: 0.3s ease-in-out;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    filter: brightness(50%);
+    color: #6c757d;
+    background-image: none !important;
+    background-color: #e5e5e5;
     &:hover{
       transition: 0.3s ease-in-out;
       flex: 2 0 auto;
-      filter: brightness(70%);
     }
   }
   .active{
@@ -1050,6 +1049,30 @@ h1, h2, h3, h4, h5, h6{
 }
 
 
+
+//-------------------------------------------
+//          WORKFLOW
+//-------------------------------------------
+.workflow-section{
+  width: 100vw;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  position: relative;
+  .workflow-img{
+    height: 110vh;
+    //height: auto;
+    width: 100vw;
+    object-fit: cover;
+  }
+  .workflow-desc{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
 
 //-------------------------------------------
 //          FOOTER
