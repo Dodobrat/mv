@@ -6,4 +6,5 @@ return[
     'password_generator' => 'Password Generator',
     'generate_password' => 'Generate',
     'copied' => 'Password Copied!',
+    'workflow_pass' => 'Access Key',
 ];

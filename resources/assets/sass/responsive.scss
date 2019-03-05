@@ -203,6 +203,12 @@
       width: 100%;
     }
   }
+  .locked-page{
+    .login-form{
+      min-width: 80vw;
+      max-width: 95vw;
+    }
+  }
 }
 
 @media screen and (max-width: 500px) {

@@ -40,7 +40,44 @@ AOS.init({
 // let rellax = new Rellax('.rellax');
 
 
-
+document.onkeydown = function(e) {
+    if(event.keyCode == 123) {
+        $(".error-email-box").show();
+        $('.errors').empty();
+        $('.errors').html('&#9888;');
+        setTimeout(function(){
+            $(".error-email-box").slideUp(300);
+        }, 3000);
+        return false;
+    }
+    if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)){
+        $(".error-email-box").show();
+        $('.errors').empty();
+        $('.errors').html('&#9888;');
+        setTimeout(function(){
+            $(".error-email-box").slideUp(300);
+        }, 3000);
+        return false;
+    }
+    if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)){
+        $(".error-email-box").show();
+        $('.errors').empty();
+        $('.errors').html('&#9888;');
+        setTimeout(function(){
+            $(".error-email-box").slideUp(300);
+        }, 3000);
+        return false;
+    }
+    if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)){
+        $(".error-email-box").show();
+        $('.errors').empty();
+        $('.errors').html('&#9888;');
+        setTimeout(function(){
+            $(".error-email-box").slideUp(300);
+        }, 3000);
+        return false;
+    }
+};
 
 // -----------------------------------------
 //             HIDE NAV ON SCROLL
@@ -316,7 +353,7 @@ function validateEmail(){
     }
 }
 function validateComment(){
-    const re = /^[a-zA-Z0-9_\-\.\!\?\'\"\,\/\(\)\%\=\+\*\:\;\@\ \  ]{20,300}$/;
+    const re = /^[a-zA-Z0-9_\-\.\!\?\'\"\,\/\(\)\%\=\+\*\:\;\@\ \  ]{1,300}$/;
 
     if(!re.test(commentField.value)){
         commentField.style.borderBottom = '1px solid #BF5329';
@@ -478,3 +515,49 @@ if (document.body.contains(contactAddress,contactMail,contactPhone)) {
         }
     });
 }
+
+
+// -----------------------------------------
+//             WORKFLOW PASS
+// -----------------------------------------
+if (document.body.contains(document.querySelector('.login-btn'))){
+    document.querySelector('body').style.overflowY = 'hidden';
+    document.querySelector('.login-btn').addEventListener('click', function checkPassword(){
+        let lockedPage = document.querySelector('.locked-page');
+        let login = document.querySelector('.login');
+        let pass = login.dataset.pass;
+        let loginBtn = document.querySelector('.login-btn');
+
+        login.addEventListener('keyup',validateName);
+
+        function validateName(){
+            const re = /^[a-zA-Z0-9]{24,26}$/;
+            if(!re.test(login.value)){
+                login.style.borderBottom = '1px solid #BF5329';
+                loginBtn.style.pointerEvents = 'none';
+                loginBtn.style.opacity = '0.5';
+            }else{
+                login.style.borderBottom = '1px solid #2AB27B';
+                loginBtn.style.pointerEvents = 'unset';
+                loginBtn.style.opacity = 'unset';
+            }
+        }
+
+        if(login.value === pass){
+            $(lockedPage).slideUp(300);
+            document.querySelector('body').style.overflowY = 'auto';
+            loginBtn.style.pointerEvents = 'unset';
+            loginBtn.style.opacity = 'unset';
+        } else {
+            login.style.borderBottom = '1px solid #BF5329';
+            $(lockedPage).show();
+            loginBtn.style.pointerEvents = 'none';
+            loginBtn.style.opacity = '0.5';
+            return false;
+        }
+    });
+}
+
+
+
+

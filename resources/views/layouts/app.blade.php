@@ -13,7 +13,9 @@
     <link rel="stylesheet" href="{{ mix('/css/aos.css') }}">
     <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
 </head>
-<body>
+<body
+        oncontextmenu="return false;"
+>
 
 <div class="preloader" id="preloader">
     <div class="preloader-chasing-squares">
@@ -154,6 +156,8 @@
 @yield('project')
 
 @yield('member')
+
+@yield('workflow')
 
 </body>
 </html>

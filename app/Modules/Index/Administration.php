@@ -127,5 +127,10 @@ pass.addEventListener("copy", function(event) {
             'label' => trans($module['slug'].'::admin.landing_image'),
             'path' => '/uploads/settings/'.$module['slug'].'_landing_image/'
         ]);
+
+        $form->add($module['slug'].'_workflow_pass', 'text', [
+            'label' => trans($module['slug'].'::admin.workflow_pass'),
+            'translate' => false
+        ]);
     }
 }
