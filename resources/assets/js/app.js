@@ -12,10 +12,10 @@ global.Rellax = require('rellax/rellax.js');
 //             PRELOADER
 // -----------------------------------------
 
-if (location.protocol !== "https:"){
-    location.replace(window.location.href.replace("http:",
-        "https:"));
-}
+// if (location.protocol !== "https:"){
+//     location.replace(window.location.href.replace("http:",
+//         "https:"));
+// }
 
 if (document.body.contains(document.querySelector(".load"))){
     function preloader(){
