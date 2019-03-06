@@ -17,14 +17,15 @@
         oncontextmenu="return false;"
 >
 
-<div class="preloader" id="preloader">
-    <div class="preloader-chasing-squares">
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-    </div>
+<div class="load">
+    <div class="spinner"></div>
+    <img src="@if(!empty(Settings::getFile('index_nav_logo')))
+    {{ Settings::getFile('index_nav_logo') }}
+    @else
+    {{ asset('img/dark-logo.png') }}
+    @endif" alt="" class="spin-img">
 </div>
+
 
 <nav class="navbar navbar-expand-lg navigation @if(Route::currentRouteName() == 'index') nav-up @endif">
     <div class="container">
@@ -156,8 +157,6 @@
 @yield('project')
 
 @yield('member')
-
-@yield('workflow')
 
 </body>
 </html>

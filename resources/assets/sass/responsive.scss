@@ -105,7 +105,17 @@
       font-size: 3vw;
     }
     .active{
+      width: 60%;
       font-size: 4vw;
+      &:hover{
+        width: 60%;
+      }
+    }.inactive{
+      width: 40%;
+      font-size: 3vw;
+      &:hover{
+        width: 45%;
+      }
     }
   }
   .sub-categories-section{
@@ -224,7 +234,7 @@
   }
   .main-categories-section{
     .main-category-btn{
-      font-size: 4vw;
+      //font-size: 4vw;
     }
     .active{
       font-size: 5vw;

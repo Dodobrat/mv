@@ -8,7 +8,8 @@
                 <div class="col-lg-4 col-md-5 col-sm-6 col-12 member-card-container py-2">
                     <div class="member-info"
                          onclick="openMemberModal( '{{ $member->id }}','{{ route('members.getMember') }}')"
-                        data-aos="fade-up">
+                         data-aos="zoom-in"
+                         data-aos-delay="300">
                         @if($member->thumbnail_media->isNotEmpty())
                             <img class="member-img"
                                  src="{{ $member->thumbnail_media->first()->getPublicPath() }}"
@@ -40,9 +41,7 @@
     </div>
 </div>
 
-<svg class="spinner" viewBox="0 0 50 50">
-    <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
-</svg>
+    <div class="aspin"></div>
 
 @endsection
 
@@ -74,12 +73,12 @@
                     member_id: memberId,
                 },
                 beforeSend: function () {
-                    $(".spinner").show();
+                    $(".aspin").show();
                 },
 
                 success: function (result) {
                     if (result.errors.length != 0) {
-                        $(".spinner").hide();
+                        $(".aspin").hide();
                         $(".error-box").show();
 
                         $.each(result.errors, function (key, value) {
@@ -90,7 +89,7 @@
                             $(".error-box").slideUp(300);
                         }, 3000);
                     } else {
-                        $(".spinner").hide();
+                        $(".aspin").hide();
                         memberModal.style.right = '0';
                         memberModal.innerHTML = result.member_modal;
                     }

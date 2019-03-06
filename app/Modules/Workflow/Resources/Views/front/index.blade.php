@@ -3,7 +3,7 @@
 
     <div class="locked-page">
         <div class="login-form">
-            <input placeholder="{{ trans('workflow::front.login_placeholder') }}" type="text" class="login" data-pass="{{ Settings::get('index_workflow_pass') }}">
+            <input placeholder="{{ trans('workflow::front.login_placeholder') }}" type="password" class="login" data-pass="{{ Settings::get('index_workflow_pass') }}">
             <button class="login-btn">{{ trans('workflow::front.login') }}</button>
         </div>
     </div>

@@ -57,7 +57,7 @@ class ContactsController extends Controller {
             'name' => 'required|max:50|min:2',
             'email' => 'required|email',
             'phone' => 'required|min:5|max:14',
-            'comment' => 'required|max:300|min:20',
+            'comment' => 'required|max:300|min:1',
         ]);
         if ($validator->fails())
         {

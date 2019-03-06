@@ -50,12 +50,12 @@
                     project_id: projectId,
                 },
                 beforeSend: function () {
-                    $(".spinner").show();
+                    $(".aspin").show();
                 },
 
                 success: function (result) {
                     if (result.errors.length != 0) {
-                        $(".spinner").hide();
+                        $(".aspin").hide();
                         $(".error-box").show();
 
                         $.each(result.errors, function (key, value) {
@@ -66,11 +66,19 @@
                             $(".error-box").slideUp(300);
                         }, 3000);
                     } else {
-                        $(".spinner").hide();
+                        $(".aspin").hide();
                         // window.history.pushState({}, "", '/' + projectSlug);
                         $(modal).slideDown(500);
                         document.querySelector('body').style.overflowY = 'hidden';
                         modal.innerHTML = result.project_modal;
+                        let carousel = document.querySelectorAll('.carousel');
+                        carousel.forEach(function (carousel) {
+                            $(function(){
+                                $(carousel).carousel({
+                                    interval: 30000,
+                                });
+                            });
+                        });
                     }
                 }
             });

@@ -33,68 +33,6 @@ h1, h2, h3, h4, h5, h6{
   color: $primary-font-color;
 }
 
-.preloader {
-  z-index: 9999;
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  transition: 0.4s ease-in-out;
-  pointer-events: none;
-  background: #fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  width: 100vw;
-  .preloader-chasing-squares {
-    width: 50px;
-    height: 50px;
-    line-height: 19px;
-    .square{
-      display: inline-block;
-      width: 15px;
-      height: 15px;
-      opacity: 1;
-      background: #666;
-      animation: focusfade .7s infinite;
-      &:nth-child(1) {
-      }
-      &:nth-child(2) {
-        animation-delay: .175s;
-      }
-      &:nth-child(3) {
-        animation-delay: .525s;
-      }
-      &:nth-child(4) {
-        animation-delay: .35s;
-      }
-    }
-  }
-}
-
-@keyframes focusfade {
-  0% {
-    opacity: 0.5;
-    background: #000;
-  }
-  30% {
-    opacity: 0.5;
-    background: #666;
-  }
-  60% {
-    opacity: 0;
-  }
-  75% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 0.5;
-    background: #000;
-  }
-}
-
 .language-switcher{
   background-color: transparent;
   padding: 0 10px;
@@ -114,45 +52,70 @@ h1, h2, h3, h4, h5, h6{
 }
 
 //-------------------------------------------
-//          AJAX LOADER
+//          LOADER
 //-------------------------------------------
 
-.spinner {
-  animation: rotate 2s linear infinite;
+.load{
+  pointer-events: auto;
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  left: 0;
   z-index: 10001;
+  background-color: $light;
+  .spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -60px 0 0 -60px;
+    border: 5px solid transparent;
+    border-radius: 50%;
+    border-top: 5px solid black;
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+  }
+  /* Safari */
+  @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  .spin-img{
+    width: 60px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.aspin{
   position: absolute;
   top: 50%;
   left: 50%;
-  margin: -25px 0 0 -25px;
-  width: 50px;
-  height: 50px;
-  & .path {
-    stroke: rgb(103, 101, 99);
-    stroke-linecap: round;
-    animation: dash 1s ease-in-out infinite;
-  }
+  margin: -35px 0 0 -35px;
+  border: 5px solid transparent;
+  border-radius: 50%;
+  border-top: 5px solid black;
+  width: 70px;
+  height: 70px;
+  -webkit-animation: aspin 2s linear infinite; /* Safari */
+  animation: aspin 2s linear infinite;
 }
-
-
-@keyframes rotate {
-  100% {
-    transform: rotate(360deg);
-  }
+/* Safari */
+@-webkit-keyframes aspin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
 }
-
-@keyframes dash {
-  0% {
-    stroke-dasharray: 1, 150;
-    stroke-dashoffset: 0;
-  }
-  50% {
-    stroke-dasharray: 90, 150;
-    stroke-dashoffset: -35;
-  }
-  100% {
-    stroke-dasharray: 90, 150;
-    stroke-dashoffset: -124;
-  }
+@keyframes aspin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 
@@ -169,6 +132,7 @@ h1, h2, h3, h4, h5, h6{
     object-fit: contain;
   }
   .company-name{
+    margin-top: 25px;
     color: #ffffff;
     text-transform: uppercase;
     font-size: 0.75vw;
@@ -371,11 +335,12 @@ h1, h2, h3, h4, h5, h6{
   overflow: hidden;
   .main-category-btn{
     transition: 0.3s ease-in-out;
-    flex: 1 0 auto;
+    //flex: 1 0 auto;
     margin: 0;
     padding: 2vh;
     border: none;
     height: 100%;
+    width: 50%;
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -390,7 +355,7 @@ h1, h2, h3, h4, h5, h6{
     text-shadow: 0px 3px 10px rgba(0,0,0,0.4);
     &:hover{
       transition: 0.3s ease-in-out;
-      flex: 4 0 auto;
+      width: 100%;
       cursor: pointer;
     }
     &:focus{
@@ -403,15 +368,16 @@ h1, h2, h3, h4, h5, h6{
     color: #6c757d;
     background-image: none !important;
     background-color: #e5e5e5;
+    width: 25%;
     &:hover{
       transition: 0.3s ease-in-out;
-      flex: 2 0 auto;
+      width: 35%;
     }
   }
   .active{
     transition: 0.3s ease-in-out;
     align-items: center;
-    flex: 4 0 auto;
+    width: 75%;
     font-size: 2vw;
     font-weight: 900;
     &:hover{
@@ -660,6 +626,71 @@ h1, h2, h3, h4, h5, h6{
         margin: 0;
       }
     }
+    .carousel{
+      margin-top: 5vh;
+      height: 95vh;
+      overflow: hidden;
+      .carousel-inner{
+        height: 87.5vh;
+        .carousel-item{
+          img{
+            width: 100%;
+            height: 87.5vh;
+            object-fit: contain;
+          }
+        }
+      }
+      .carousel-control-prev{
+        height: 87.5vh;
+      }.carousel-control-next{
+        height: 87.5vh;
+      }
+      .carousel-control-prev-icon,
+      .carousel-control-next-icon {
+        height: 75px;
+        width: 75px;
+        background-size: 100%, 100%;
+        border: none;
+        background-color: #e1e1e1;
+        background-image: none;
+      }
+
+      .carousel-control-next-icon:after
+      {
+        content: '>';
+        font-size: 50px;
+        color: $primary-font-color;
+      }
+
+      .carousel-control-prev-icon:after {
+        content: '<';
+        font-size: 50px;
+        color: $primary-font-color;
+      }
+      .carousel-indicators{
+        position: static;
+        left: initial;
+        width: initial;
+        //margin-left: initial;
+        margin: 0 auto;
+        li{
+          white-space:nowrap;
+          overflow-x:auto;
+          width: initial;
+          height: initial;
+          text-indent: initial;
+          img{
+            height: 5vh;
+            filter: saturate(0%);
+          }
+        }
+        .active{
+          img{
+            filter: saturate(100%);
+          }
+        }
+      }
+    }
     #project-view-container{
       padding-top: 5vh;
       .project-view{
@@ -686,11 +717,11 @@ h1, h2, h3, h4, h5, h6{
       li{
         a{
           padding: 0;
-          margin: 0 10px;
+          margin: 0 5px;
           img{
             filter: saturate(0%);
             height: 8vh;
-            width: 125px;
+            width: auto;
             object-fit: cover;
           }
         }
@@ -700,7 +731,7 @@ h1, h2, h3, h4, h5, h6{
           filter: saturate(100%);
         }
         border-radius: 0;
-        background-color: $brand-primary;
+        background-color: transparent;
       }
     }
   }

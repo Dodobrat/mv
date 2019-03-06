@@ -11,7 +11,7 @@
                 </div>
             </div>
             <div class="col-lg-5 col-md-10 col-sm-10 col-11">
-                <div class="contact-email">
+                <div class="contact-email" data-aos="zoom-in" data-aos-delay="500">
                     <h4 class="contact-email-title">
                         {{ trans('contacts::front.contact_us') }}
                     </h4>

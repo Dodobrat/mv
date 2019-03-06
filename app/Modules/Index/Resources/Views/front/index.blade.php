@@ -35,9 +35,7 @@
         </div>
     </div>
 
-    <svg class="spinner" viewBox="0 0 50 50">
-        <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
-    </svg>
+<div class="aspin"></div>
 
 <div id="top-projects">
     <div class="container-fluid">
@@ -48,7 +46,8 @@
 
             @foreach($top_projects as $top_project)
 
-                <div class="card portfolio-grid-item">
+                <div class="card portfolio-grid-item"
+                     data-aos="zoom-in">
                     <a id="modal-btn"
                        onclick="openModal( '{{ $top_project->id }}','{{ route('projects.getProject') }}','{{ $top_project->slug }}')">
                         @if($top_project->media->isNotEmpty())

@@ -12,17 +12,17 @@ global.Rellax = require('rellax/rellax.js');
 //             PRELOADER
 // -----------------------------------------
 
-// if (location.protocol !== "https:"){
-//     location.replace(window.location.href.replace("http:",
-//         "https:"));
-// }
+if (location.protocol !== "https:"){
+    location.replace(window.location.href.replace("http:",
+        "https:"));
+}
 
-if (document.body.contains(document.getElementById("preloader"))){
+if (document.body.contains(document.querySelector(".load"))){
     function preloader(){
-        let preloader = document.getElementById("preloader");
+        let load = document.querySelector(".load");
         window.addEventListener('load', function(){
             setTimeout(() => {
-                preloader.style.opacity = '0';
+                $(load).slideUp(200);
             }, 1);
         });
     }
@@ -127,7 +127,7 @@ let projectsContainer = document.getElementById('portfolio');
 let footer = document.querySelector('.footer');
 let topProjectsContainer = document.getElementById('top-projects');
 $(".projects-heading").hide();
-$(".spinner").hide();
+$(".aspin").hide();
 $(projectsContainer).hide();
 $(topProjectsContainer).hide();
 
@@ -154,12 +154,12 @@ cat.forEach(function (cat) {
                 category_slug: catSlug,
             },
             beforeSend: function() {
-                $(".spinner").show();
+                $(".aspin").show();
             },
 
             success: function(result) {
                 if (result.errors.length != 0) {
-                    $(".spinner").hide();
+                    $(".aspin").hide();
                     $(".error-box").show();
 
                     $.each(result.errors, function (key, value) {
@@ -177,7 +177,7 @@ cat.forEach(function (cat) {
                     $(footer).removeClass('hidden').addClass('visible');
                     subCatsContainer.style.display = 'flex';
                     topProjectsContainer.style.display = 'block';
-                    $(".spinner").hide();
+                    $(".aspin").hide();
                     subCatsContainer.innerHTML = result.new_blade;
                     // window.history.pushState({},"", catRoute + '/' +catSlug);
 
@@ -207,12 +207,12 @@ cat.forEach(function (cat) {
                                     sub_category_slug: subCatSlug,
                                 },
                                 beforeSend: function() {
-                                    $(".spinner").show();
+                                    $(".aspin").show();
                                 },
 
                                 success: function(result) {
                                     if (result.errors.length != 0) {
-                                        $(".spinner").hide();
+                                        $(".aspin").hide();
                                         $(".error-box").show();
 
                                         $.each(result.errors, function (key, value) {
@@ -227,7 +227,7 @@ cat.forEach(function (cat) {
                                         $(projectsContainer).show();
                                         $(".sub-categories-heading").slideUp(500);
                                         $(".projects-heading").slideUp(100);
-                                        $(".spinner").hide();
+                                        $(".aspin").hide();
                                         projectsContainer.innerHTML = result.new_view;
                                         $('.portfolio-grid > .portfolio-grid-item').hoverdir();
                                         // window.history.pushState({},"", subCatRoute + '#'+ subCatSlug);
@@ -255,12 +255,57 @@ $(document).keyup(function(e) {
     }
     if (e.keyCode === 37){
         // left arrow
+        $('a.carousel-control-prev').trigger('click');
     }
     if (e.keyCode === 39){
         // right arrow
+        $('a.carousel-control-next').trigger('click');
     }
 
 });
+
+// ---------------------------------------------------
+//         CONTENT - ADDED CUSTOM TOUCH SUPPORT FOR CAROUSEL
+// ---------------------------------------------------
+let pageWidth = window.innerWidth || document.body.clientWidth;
+let treshold = Math.max(1,Math.floor(0.01 * (pageWidth)));
+let touchstartX = 0;
+let touchstartY = 0;
+let touchendX = 0;
+let touchendY = 0;
+
+const limit = Math.tan(45 * 1.5 / 180 * Math.PI);
+const gestureZone = document.getElementsByTagName('body');
+
+gestureZone[0].addEventListener('touchstart', function(event) {
+    touchstartX = event.changedTouches[0].screenX;
+    touchstartY = event.changedTouches[0].screenY;
+}, false);
+
+gestureZone[0].addEventListener('touchend', function(event) {
+    touchendX = event.changedTouches[0].screenX;
+    touchendY = event.changedTouches[0].screenY;
+    handleGesture(event);
+}, false);
+
+function handleGesture(e) {
+    let x = touchendX - touchstartX;
+    let y = touchendY - touchstartY;
+    let yx = Math.abs(y / x);
+    if (Math.abs(x) > treshold || Math.abs(y) > treshold) {
+        if (yx <= limit) {
+            if (x < 0) {
+                $(function(){
+                    $('.carousel').carousel('next');
+                });
+            } else {
+                $(function(){
+                    $('.carousel').carousel('prev');
+                });
+            }
+        }
+    }
+}
 
 
 
@@ -314,7 +359,7 @@ emailField.addEventListener('keyup',validateEmail);
 commentField.addEventListener('keyup',validateComment);
 
 function validateName(){
-    const re = /^[a-zA-Z]{2,50}$/;
+    const re = /^[a-zA-Z\ \  ]{2,50}$/;
 
     if(!re.test(nameField.value)){
         nameField.style.borderBottom = '1px solid #BF5329';
