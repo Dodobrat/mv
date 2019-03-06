@@ -84,8 +84,8 @@ class Administration implements Module {
 let pass = document.querySelector(\'.pass\');
 let btn = document.querySelector(\'.password-generator-btn\');
 btn.addEventListener(\'click\', function(){
-let length = 25,
-        charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
+let length = 30,
+        charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_/!&",
         retVal = "";
     for (let i = 0, n = charset.length; i < length; ++i) {
         retVal += charset.charAt(Math.floor(Math.random() * n));

@@ -20,6 +20,12 @@ class WorkflowForm extends AdminForm
             'checked' => @$this->model->visible,
         ]);
 
+        $this->add('real_estate', 'checkbox', [
+            'label' => trans('workflow::admin.real_estate'),
+            'value' => 1,
+            'checked' => @$this->model->real_estate,
+        ]);
+
         $this->add('footer', 'admin_footer');
         $this->add('send', 'submit', [
             'label' => trans('administration::index.save'),

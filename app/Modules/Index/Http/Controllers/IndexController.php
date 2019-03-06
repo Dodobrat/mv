@@ -11,27 +11,8 @@ use App\Http\Controllers\Controller;
 class IndexController extends Controller
 {
 
-//    protected $projects_per_page = 4;
+    public function index($slug = null) {
 
-    public function index(Request $request, $slug = null) {
-
-//        $count = 0;
-//
-//        if ($request->has('count')) {
-//            $count = $request->get('count');
-//        }
-//
-//        $skip = $count;
-//        $take = $count + $this->projects_per_page;
-
-//        $projects = Project::active()->reversed()->with(['media','translations'])->skip($skip)->take($take)->get();
-
-//        if($request->ajax()) {
-//            return [
-//                'projects' => view('index::front.boxes.projects')->with(compact('projects'))->render(),
-//                'next_page' => $take
-//            ];
-//        }
         $top_projects = Project::active()->special()->reversed()->with(['media'])->limit(9)->get();
 
         $categories = Category::where('parent_id',null)->active()->get();
@@ -59,9 +40,4 @@ class IndexController extends Controller
 
         return view('index::front.index',compact('categories','sub_categories','projects','top_projects'));
     }
-
-
-
-
-
 }

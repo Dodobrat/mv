@@ -26,6 +26,7 @@ class Workflow extends AdminModel
      */
     protected $fillable = [
         'visible',
+        'real_estate'
     ];
     /**
      * The attributes that should be casted to native types.
@@ -34,6 +35,7 @@ class Workflow extends AdminModel
      */
     protected $casts = [
         'visible' => 'boolean',
+        'real_estate' => 'boolean',
     ];
 
     protected $with = ['translations'];
@@ -47,5 +49,8 @@ class Workflow extends AdminModel
      */
     public function scopeActive($query) {
         return $query->where($this->table . '.visible', 1);
+    }
+    public function scopeEstate($query) {
+        return $query->where($this->table . '.real_estate', 1);
     }
 }

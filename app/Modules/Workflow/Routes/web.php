@@ -23,5 +23,9 @@ Route::group([
             'as' => 'index',
             'uses' => 'WorkflowController@index'
         ]);
+        Route::get('/real-estate', [
+            'as' => 'real',
+            'uses' => 'WorkflowController@real'
+        ]);
     });
 });

@@ -54,6 +54,4 @@ class CategoriesController extends Controller
         $new_projects = view('index::front.boxes.projects', compact('projects'))->render();
         return response()->json(['errors' => $errors, 'new_view' => $new_projects]);
     }
-
-
 }

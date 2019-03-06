@@ -18,6 +18,7 @@ class CreateWorkflowTable extends Migration
         Schema::create('workflow', function (Blueprint $table) {
             $table->increments('id');
             $table->boolean('visible')->default(true);
+            $table->boolean('real_estate')->default(false);
             NestedSet::columns($table);
             $table->timestamps();
         });

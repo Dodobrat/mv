@@ -37,6 +37,8 @@ class WorkflowController extends BaseAdministrationController
                     return Form::adminEditButton(trans('administration::index.edit'), Administration::route('workflow.edit', $work->id)) . $actions;
                 })->addColumn('visible', function ($work) {
                     return Form::adminSwitchButton('visible', $work);
+                })->addColumn('real_estate', function ($work) {
+                    return Form::adminSwitchButton('real_estate', $work);
                 });
             return $datatables->make(true);
         }
@@ -58,6 +60,11 @@ class WorkflowController extends BaseAdministrationController
                 'name' => 'visible',
                 'orderable' => false,
                 'title' => trans('workflow::admin.visible'),
+            ])->addColumn([
+                'data' => 'real_estate',
+                'name' => 'real_estate',
+                'orderable' => false,
+                'title' => trans('workflow::admin.real_estate'),
             ])->addColumn([
                 'data' => 'created_at',
                 'name' => 'created_at',

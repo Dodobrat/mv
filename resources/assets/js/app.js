@@ -565,28 +565,27 @@ if (document.body.contains(contactAddress,contactMail,contactPhone)) {
 // -----------------------------------------
 //             WORKFLOW PASS
 // -----------------------------------------
-if (document.body.contains(document.querySelector('.login-btn'))){
+if (document.body.contains(document.querySelector('.locked-page'))){
     document.querySelector('body').style.overflowY = 'hidden';
-    document.querySelector('.login-btn').addEventListener('click', function checkPassword(){
+    let login = document.querySelector('.login');
+    let loginBtn = document.querySelector('.login-btn');
+    login.addEventListener('keyup',function () {
+        const re = /^[a-zA-Z0-9\-\_\/\!\&]{30}$/;
+        if(!re.test(login.value)){
+            login.style.borderBottom = '1px solid #BF5329';
+            loginBtn.style.pointerEvents = 'none';
+            loginBtn.style.opacity = '0.5';
+        }else{
+            login.style.borderBottom = '1px solid #2AB27B';
+            loginBtn.style.pointerEvents = 'unset';
+            loginBtn.style.opacity = 'unset';
+        }
+    });
+    document.querySelector('.login-btn').addEventListener('click', function(){
         let lockedPage = document.querySelector('.locked-page');
         let login = document.querySelector('.login');
         let pass = login.dataset.pass;
         let loginBtn = document.querySelector('.login-btn');
-
-        login.addEventListener('keyup',validateName);
-
-        function validateName(){
-            const re = /^[a-zA-Z0-9]{24,26}$/;
-            if(!re.test(login.value)){
-                login.style.borderBottom = '1px solid #BF5329';
-                loginBtn.style.pointerEvents = 'none';
-                loginBtn.style.opacity = '0.5';
-            }else{
-                login.style.borderBottom = '1px solid #2AB27B';
-                loginBtn.style.pointerEvents = 'unset';
-                loginBtn.style.opacity = 'unset';
-            }
-        }
 
         if(login.value === pass){
             $(lockedPage).slideUp(300);
@@ -602,7 +601,3 @@ if (document.body.contains(document.querySelector('.login-btn'))){
         }
     });
 }
-
-
-
-

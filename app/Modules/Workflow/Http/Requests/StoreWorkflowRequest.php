@@ -32,6 +32,7 @@ class StoreWorkflowRequest extends FormRequest
         }
 
         $trans['visible'] = 'boolean';
+        $trans['real_estate'] = 'boolean';
 
         return $trans;
     }

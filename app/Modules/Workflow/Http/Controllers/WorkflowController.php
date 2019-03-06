@@ -10,8 +10,15 @@ class WorkflowController extends Controller
 {
     public function index(){
 
-        $workflow = Workflow::with(['media'])->reversed()->get();
+        $workflow = Workflow::with(['media'])->reversed()->active()->where('real_estate', false)->get();
 
         return view('workflow::front.index',compact('workflow'));
+    }
+
+    public function real(){
+
+        $real = Workflow::with(['media'])->reversed()->active()->estate()->get();
+
+        return view('workflow::front.real',compact('real'));
     }
 }

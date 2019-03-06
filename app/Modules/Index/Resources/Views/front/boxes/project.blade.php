@@ -34,7 +34,7 @@
 
                     <ol class="carousel-indicators list-inline">
                         @foreach($project->media as $thumbs)
-                        <li class="list-inline-item" data-target="#carousel_{{ $project->id }}" data-slide-to="{{ $loop->index }}" class="{{ $loop->first ? 'active' : '' }}">
+                        <li class="list-inline-item {{ $loop->first ? 'active' : '' }}" data-target="#carousel_{{ $project->id }}" data-slide-to="{{ $loop->index }}">
                             @if(!empty($thumbs))
                                 <img src="{{ $thumbs->getPublicPath() }}">
                             @else

@@ -7,4 +7,5 @@ return[
     'create' => 'Create',
     'visible' => 'Visible',
     'date' => 'Created At',
+    'real_estate' => 'Real Estate',
 ];

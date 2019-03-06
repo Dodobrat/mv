@@ -33,6 +33,14 @@ h1, h2, h3, h4, h5, h6{
   color: $primary-font-color;
 }
 
+img{
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
+}
+
 .language-switcher{
   background-color: transparent;
   padding: 0 10px;
@@ -642,8 +650,13 @@ h1, h2, h3, h4, h5, h6{
       }
       .carousel-control-prev{
         height: 87.5vh;
-      }.carousel-control-next{
+        width: 30%;
+        justify-content: flex-start;
+      }
+      .carousel-control-next{
         height: 87.5vh;
+        width: 30%;
+        justify-content: flex-end;
       }
       .carousel-control-prev-icon,
       .carousel-control-next-icon {
@@ -654,7 +667,6 @@ h1, h2, h3, h4, h5, h6{
         background-color: #e1e1e1;
         background-image: none;
       }
-
       .carousel-control-next-icon:after
       {
         content: '>';
