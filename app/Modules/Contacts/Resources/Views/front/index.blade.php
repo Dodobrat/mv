@@ -6,7 +6,7 @@
     <div class="contacts-section">
         <div class="row justify-content-center align-items-center">
             <div class="col-lg-7 col-md-10 col-sm-11 col-11 desc">
-                <div class="contact-description">
+                <div class="contact-description" data-aos="fade-right" data-aos-delay="500">
                     {!! $contact->description !!}
                 </div>
             </div>
@@ -66,7 +66,7 @@
                 </div>
             </div>
         </div>
-        <div class="row justify-content-center align-items-center small-info">
+        <div class="row justify-content-center align-items-center small-info" data-aos="fade-up" data-aos-delay="500">
             <div class="col-lg-4 col-md-12 col-sm-12 col-12">
                 <p class="contact-label">{{ trans('contacts::front.address') }}</p>
                 <p class="contact-address" title="{{ trans('index::front.copy') }}">

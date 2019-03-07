@@ -35,10 +35,14 @@
         </div>
     </div>
 
-<div class="aspin"></div>
+    <h3 class="empty text-center">{{ trans('index::front.nothing_to_show') }}</h3>
+
+<div class="aspin">
+    <div class="spinner"></div>
+</div>
 
 <div id="top-projects">
-    <div class="container-fluid">
+    <div class="container">
         <div class="projects-heading-top">
             {{ trans('index::front.top_projects') }}
         </div>
@@ -46,8 +50,7 @@
 
             @foreach($top_projects as $top_project)
 
-                <div class="card portfolio-grid-item"
-                     data-aos="zoom-in">
+                <div class="card portfolio-grid-item">
                     <a id="modal-btn"
                        onclick="openModal( '{{ $top_project->id }}','{{ route('projects.getProject') }}','{{ $top_project->slug }}')">
                         @if($top_project->media->isNotEmpty())

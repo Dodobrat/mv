@@ -37,9 +37,6 @@ AOS.init({
     duration: 400
 });
 
-// let rellax = new Rellax('.rellax');
-
-
 document.onkeydown = function(e) {
     if(event.keyCode == 123) {
         $(".error-email-box").show();
@@ -78,6 +75,20 @@ document.onkeydown = function(e) {
         return false;
     }
 };
+
+let $backToTop = $(".back-to-top");
+
+$(window).on('scroll', function() {
+    if ($(this).scrollTop() > 100) {
+        $backToTop.addClass('show');
+    } else {
+        $backToTop.removeClass('show');
+    }
+});
+
+$backToTop.on('click', function(e) {
+    $("html, body").animate({scrollTop: 0}, 500);
+});
 
 // -----------------------------------------
 //             HIDE NAV ON SCROLL
@@ -127,6 +138,7 @@ let projectsContainer = document.getElementById('portfolio');
 let footer = document.querySelector('.footer');
 let topProjectsContainer = document.getElementById('top-projects');
 $(".projects-heading").hide();
+$('.empty').hide();
 $(".aspin").hide();
 $(projectsContainer).hide();
 $(topProjectsContainer).hide();
@@ -177,6 +189,12 @@ cat.forEach(function (cat) {
                     $(footer).removeClass('hidden').addClass('visible');
                     subCatsContainer.style.display = 'flex';
                     topProjectsContainer.style.display = 'block';
+                    if(projectsContainer.innerHTML == "" && $('.empty').show() == true){
+                        $('.empty').show();
+                        topProjectsContainer.style.marginTop = "0px";
+                    }else{
+                        $('.empty').hide();
+                    }
                     $(".aspin").hide();
                     subCatsContainer.innerHTML = result.new_blade;
                     // window.history.pushState({},"", catRoute + '/' +catSlug);
@@ -223,13 +241,20 @@ cat.forEach(function (cat) {
                                             $(".error-box").slideUp(300);
                                         }, 3000);
                                     } else {
-                                        $(topProjectsContainer).hide();
+                                        $(topProjectsContainer).slideDown(300);
+                                        topProjectsContainer.style.marginTop = "100px";
                                         $(projectsContainer).show();
                                         $(".sub-categories-heading").slideUp(500);
                                         $(".projects-heading").slideUp(100);
-                                        $(".aspin").hide();
                                         projectsContainer.innerHTML = result.new_view;
                                         $('.portfolio-grid > .portfolio-grid-item').hoverdir();
+                                        if(projectsContainer.innerHTML == ""){
+                                            $('.empty').show();
+                                            topProjectsContainer.style.marginTop = "0px";
+                                        }else{
+                                            $('.empty').hide();
+                                        }
+                                        $(".aspin").hide();
                                         // window.history.pushState({},"", subCatRoute + '#'+ subCatSlug);
                                     }
                                 }
@@ -248,17 +273,14 @@ cat.forEach(function (cat) {
 let modal = document.querySelector('#my-modal');
 
 $(document).keyup(function(e) {
-    // if (e.keyCode === 13) $('.save').click();     // enter
     if (e.keyCode === 27){
         $(modal).slideUp(300);
         document.querySelector('body').style.overflowY = 'auto';
     }
     if (e.keyCode === 37){
-        // left arrow
         $('a.carousel-control-prev').trigger('click');
     }
     if (e.keyCode === 39){
-        // right arrow
         $('a.carousel-control-next').trigger('click');
     }
 
@@ -314,7 +336,6 @@ function handleGesture(e) {
 // -----------------------------------------
 
 $(function () {
-    // $('.member-card-container > .member-card').hoverdir();
     $('.portfolio-grid > .portfolio-grid-item').hoverdir();
     $('.top-portfolio-grid > .portfolio-grid-item').hoverdir();
 });

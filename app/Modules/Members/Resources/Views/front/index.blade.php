@@ -41,7 +41,9 @@
     </div>
 </div>
 
-    <div class="aspin"></div>
+    <div class="aspin">
+        <div class="spinner"></div>
+    </div>
 
 @endsection
 

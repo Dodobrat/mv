@@ -8,4 +8,5 @@ return[
     'email' => 'e-mail',
     'copy' => 'copy to clipboard',
     'copied' => 'Copied !',
+    'nothing_to_show' => 'Oops! No projects to show here!',
 ];

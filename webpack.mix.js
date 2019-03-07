@@ -9,7 +9,7 @@ mix.webpackConfig({
 });
 
 mix.js('resources/assets/js/app.js', 'public/js/app.js')
-    .styles('resources/assets/css/aos.css','public/css/aos.css')
+    .copy('resources/assets/css/aos.css','public/css/aos.css', true)
     .sass('resources/assets/sass/app.scss', 'public/css/app.css')
     .copy('resources/assets/images', 'public/img', true)
     .copy('resources/assets/fonts', 'public/font', true)
