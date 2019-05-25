@@ -18,4 +18,16 @@
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
+
+    # BEGIN Force HTTP
+    RewriteEngine On
+    RewriteCond %{SERVER_PORT} 443
+    RewriteRule ^(.*)$ http://miragevisualisation.com/$1 [R=301,L]
+    # END Force HTTP
+
+    # Remove www from any URLs that have them:
+    RewriteEngine on
+    RewriteCond %{HTTP_HOST} ^www\.
+    RewriteRule ^(.*)$ http://miragevisualisation.com/$1 [R=301,L]
+
 </IfModule>
